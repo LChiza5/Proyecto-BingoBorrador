@@ -17,11 +17,15 @@ import java.util.List;
  * @author ilope
  */
 public class ControladorPrincipal {
+   
+    
     private final Juego juego;
 
     public ControladorPrincipal() {
         this.juego = Juego.getInstancia();
     }
+
+    // ================== MODO DE JUEGO ==================
 
     public void setModoJuego(ModoJuego modo) {
         switch (modo) {
@@ -31,11 +35,16 @@ public class ControladorPrincipal {
         }
     }
 
-    // Cartones
+    // ================== CARTONES ==================
+
     public boolean agregarCartonManual(String id, int[][] numeros) {
         Carton c = new Carton(id);
-        for (int r=0;r<5;r++) for (int co=0;co<5;co++) c.setNumero(r,co,numeros[r][co]);
+        for (int r = 0; r < 5; r++)
+            for (int col = 0; col < 5; col++)
+                c.setNumero(r, col, numeros[r][col]);
+
         if (!c.validar()) return false;
+
         juego.agregarCarton(c);
         return true;
     }
@@ -46,20 +55,47 @@ public class ControladorPrincipal {
         return c.getId();
     }
 
-    public void eliminarCarton(String id) { juego.eliminarCarton(id); }
-    public List<Carton> listarCartones() { return juego.getCartones(); }
+    public void eliminarCarton(String id) {
+        juego.eliminarCarton(id);
+    }
 
-    // Tómbola
-    public int sacarNumeroAuto() { return juego.sacarAutomatico(); }
-    public boolean ingresarNumeroManual(int numero) { return juego.ingresarManual(numero); }
+    public List<Carton> listarCartones() {
+        return juego.getCartones();
+    }
+
+    public Carton buscarCarton(String id) {
+        return juego.getCartones()
+               .stream()
+               .filter(c -> c.getId().equals(id))
+               .findFirst()
+               .orElse(null);
+    }
+
+    // ================== TÓMBOLA ==================
+
+    public int sacarNumeroAuto() {
+        return juego.sacarAutomatico(); // YA MARCA AUTOMÁTICAMENTE
+    }
+
+    public boolean ingresarNumeroManual(int numero) {
+        return juego.ingresarManual(numero); // idem
+    }
+
     public List<Integer> getNumerosSalidos() { return juego.getNumerosSalidos(); }
     public int getUltimoNumero() { return juego.getUltimoNumero(); }
+   public List<Integer> getNumerosRestantes() {
+    return juego.getNumerosRestantes();
+}
 
-    // Reinicio
-    public void reiniciarJuego() { juego.iniciarRonda(); }
+    // ================== Verificación ==================
 
-    // Desmarcar (por error)
-    public void desmarcarNumero(int numero) {
-        for (Carton c : juego.getCartones()) c.desmarcar(numero);
+    public boolean esGanador(Carton c) {
+        return c != null && juego.getEstrategia().esGanador(c);
+    }
+
+    // ================== RESET ==================
+
+    public void reiniciarJuego() {
+        juego.iniciarRonda();
     }
 }

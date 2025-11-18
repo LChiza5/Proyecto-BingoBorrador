@@ -13,6 +13,7 @@ import java.util.List;
  * @author ilope
  */
 public class Juego implements Observer {
+
     private static Juego instancia;
 
     public static Juego getInstancia() {
@@ -24,6 +25,7 @@ public class Juego implements Observer {
     private final Tombola tombola = new Tombola();
     private StrategyGanador estrategia = new Strategy();
     private final VerificadorGanador verificador = new VerificadorGanador(estrategia);
+
     private int ultimoNumero = -1;
     private boolean enRonda = false;
 
@@ -32,12 +34,22 @@ public class Juego implements Observer {
     }
 
     public void agregarCarton(Carton c) { cartones.add(c); }
-    public void eliminarCarton(String id) { cartones.removeIf(x -> x.getId().equals(id)); }
-    public List<Carton> getCartones() { return Collections.unmodifiableList(cartones); }
+
+    public void eliminarCarton(String id) {
+        cartones.removeIf(x -> x.getId().equals(id));
+    }
+
+    public List<Carton> getCartones() {
+        return Collections.unmodifiableList(cartones);
+    }
 
     public void setEstrategia(StrategyGanador e) {
         this.estrategia = e;
         verificador.setEstrategia(e);
+    }
+
+    public StrategyGanador getEstrategia() {
+        return estrategia;
     }
 
     public void iniciarRonda() {
@@ -48,21 +60,30 @@ public class Juego implements Observer {
 
     public void finalizarRonda() { enRonda = false; }
 
-    public int sacarAutomatico() { if (!enRonda) iniciarRonda(); return tombola.sacarAleatorio(); }
-    public boolean ingresarManual(int n) { if (!enRonda) iniciarRonda(); return tombola.ingresarManual(n); }
+    public int sacarAutomatico() {
+        if (!enRonda) iniciarRonda();
+        return tombola.sacarAleatorio();
+    }
 
-    public List<Integer> getNumerosSalidos() { return tombola.getSalidos(); }
+    public boolean ingresarManual(int n) {
+        if (!enRonda) iniciarRonda();
+        return tombola.ingresarManual(n);
+    }
+
+    public List<Integer> getNumerosSalidos() {
+        return tombola.getSalidos();
+    }
 
     @Override
     public void onNumeroCantado(int numero) {
         this.ultimoNumero = numero;
         if (numero == -1) return;
-        // marcar en todos los cartones
+
         for (Carton c : cartones) c.marcar(numero);
-        // verificar ganadores con la estrategia actual
+
         List<Carton> ganadores = verificador.verificar(cartones);
+
         if (!ganadores.isEmpty()) {
-            // notificar a la tómbola/vistas mediante tombola.notifyGanadores
             tombola.notifyGanadores(ganadores);
             enRonda = false;
         }
@@ -70,8 +91,19 @@ public class Juego implements Observer {
 
     @Override
     public void onGanadores(List<Carton> ganadores) {
-        // no usado aquí; tombola notifica a observers directamente
+        // para expansión futura
     }
 
-    public int getUltimoNumero() { return ultimoNumero; }
+    public List<Integer> getNumerosRestantes() {
+    List<Integer> restantes = new ArrayList<>();
+    for (int i = 1; i <= 75; i++) {
+        if (!getNumerosSalidos().contains(i)) {
+            restantes.add(i);
+        }
+    }
+    return restantes;
+}
+public int getUltimoNumero() {
+    return ultimoNumero;
+}
 }
