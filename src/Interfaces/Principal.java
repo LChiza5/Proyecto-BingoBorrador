@@ -27,7 +27,6 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -49,23 +48,10 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(212, 175, 55));
-        jButton1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Manual");
-        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 750, 140, 70));
-
         jButton2.setBackground(new java.awt.Color(212, 175, 55));
         jButton2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Automatico");
+        jButton2.setText("Jugar");
         jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 830, 140, 70));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 760, 140, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bingo-banner-floating-3d-lotto-game-balls-lotteries-gaming-event-promotion-with-golden-coins-and-falling-confetti-illustration-vector.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 0, 1920, -1));
@@ -88,10 +74,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -133,7 +115,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
