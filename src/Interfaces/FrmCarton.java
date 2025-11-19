@@ -4,6 +4,7 @@
  */
 package Interfaces;
 
+import Controlador.ControladorPrincipal;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -15,32 +16,35 @@ import javax.swing.JOptionPane;
  */
 public class FrmCarton extends javax.swing.JInternalFrame {
 
-    
+    private ControladorPrincipal contrlPrin;
     private JButton[][] botones;
     /**
      * Creates new form FrmCarton
+     * @param contrlPrin
      */
-    public FrmCarton() {
+    public FrmCarton(ControladorPrincipal contrlPrin) {
         initComponents();
         
+        this.contrlPrin = contrlPrin;
         
         botones = new JButton[][]{
-        {b0_0, b0_1, b0_2, b0_3, b0_4},
-        {b1_0, b1_1, b1_2, b1_3, b1_4},
-        {b2_0, b2_1,       b2_3, b2_4},
-        {b3_0, b3_1, b3_2, b3_3, b3_4},
-        {b4_0, b4_1, b4_2, b4_3, b4_4}
+        {b0_0, b1_0, b2_0, b3_0, b4_0},
+        {b0_1, b1_1, b2_1, b3_1, b4_1},
+        {b0_2, b1_2, b2_2, b3_2, b4_2},
+        {b0_3, b1_3, b2_3, b3_3, b4_3},
+        {b0_4, b1_4, b2_4, b3_4, b4_4}
     };
     }
     
-    
 
+    
     public void llenarCarton(int[][] v, String id ){
         for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             botones[i][j].setText(String.valueOf(v[i][j]));
         }
     }
+       btnId.setText(id);
     }
     
     public void pintarCarton(int n){
@@ -72,18 +76,6 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     }
     
     
-    public void internalFrameClosing(javax.swing.event.InternalFrameEvent e) {
-                   
-            int r = JOptionPane.showConfirmDialog(null, "¿Desea cerrar esta ventana?","Confirmación",JOptionPane.YES_NO_OPTION);
-            if (r == JOptionPane.YES_OPTION) {
-
-        
-        this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-        } else {
-        this.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,7 +85,6 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        idCarton = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         b0_0 = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
@@ -109,7 +100,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
         b4_1 = new javax.swing.JButton();
         b1_1 = new javax.swing.JButton();
         b0_1 = new javax.swing.JButton();
-        bNull = new javax.swing.JButton();
+        b2_2 = new javax.swing.JButton();
         b3_2 = new javax.swing.JButton();
         b4_2 = new javax.swing.JButton();
         b1_2 = new javax.swing.JButton();
@@ -124,10 +115,24 @@ public class FrmCarton extends javax.swing.JInternalFrame {
         b4_4 = new javax.swing.JButton();
         b1_4 = new javax.swing.JButton();
         b0_4 = new javax.swing.JButton();
+        btnId = new javax.swing.JButton();
 
-        idCarton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idCartonActionPerformed(evt);
+        setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -235,10 +240,10 @@ public class FrmCarton extends javax.swing.JInternalFrame {
             }
         });
 
-        bNull.setText(":)");
-        bNull.addActionListener(new java.awt.event.ActionListener() {
+        b2_2.setText(":)");
+        b2_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNullActionPerformed(evt);
+                b2_2ActionPerformed(evt);
             }
         });
 
@@ -334,7 +339,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
@@ -364,7 +369,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(b1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bNull, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(b2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(b3_2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -401,16 +406,16 @@ public class FrmCarton extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idCarton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(btnId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b0_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b3_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b4_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b0_1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,7 +425,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b0_2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bNull, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b3_2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b4_2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -438,7 +443,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
                     .addComponent(b3_4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b1_4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b4_4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGap(17, 17, 17))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 155, Short.MAX_VALUE)
@@ -448,10 +453,6 @@ public class FrmCarton extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void idCartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idCartonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idCartonActionPerformed
 
     private void b0_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b0_0ActionPerformed
         // TODO add your handling code here:
@@ -501,9 +502,9 @@ public class FrmCarton extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_b0_1ActionPerformed
 
-    private void bNullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNullActionPerformed
+    private void b2_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b2_2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bNullActionPerformed
+    }//GEN-LAST:event_b2_2ActionPerformed
 
     private void b3_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b3_2ActionPerformed
         // TODO add your handling code here:
@@ -561,6 +562,18 @@ public class FrmCarton extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_b0_4ActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        int r = JOptionPane.showConfirmDialog(this, "Quieres borrar el cartón con ID: "+btnId.getText(), "Borrar Cartón!", JOptionPane.YES_NO_OPTION);
+        
+        if (r == JOptionPane.YES_OPTION) {
+            this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+            this.contrlPrin.eliminarCarton(btnId.getText());
+            
+        }else{
+            this.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+        }
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b0_0;
@@ -575,6 +588,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     private javax.swing.JButton b1_4;
     private javax.swing.JButton b2_0;
     private javax.swing.JButton b2_1;
+    private javax.swing.JButton b2_2;
     private javax.swing.JButton b2_3;
     private javax.swing.JButton b2_4;
     private javax.swing.JButton b3_0;
@@ -587,8 +601,7 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     private javax.swing.JButton b4_2;
     private javax.swing.JButton b4_3;
     private javax.swing.JButton b4_4;
-    private javax.swing.JButton bNull;
-    private javax.swing.JTextField idCarton;
+    private javax.swing.JButton btnId;
     private javax.swing.JTextField idCarton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JInternalFrame jInternalFrame1;

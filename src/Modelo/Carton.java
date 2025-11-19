@@ -6,6 +6,7 @@ package Modelo;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Carton {
 
     public int getNumero(int fila, int col) { return numeros[fila][col]; }
     public void setNumero(int fila, int col, int valor) { numeros[fila][col] = valor; }
-
+    
     public boolean isMarcado(int fila, int col) { return marcados[fila][col]; }
 
     public boolean marcar(int numero) {
@@ -74,7 +75,8 @@ public class Carton {
             for (int c=0;c<5;c++) {
                 if (r==2 && c==2) continue;
                 int n = numeros[r][c];
-                if (n < 1 || n > 75) return false;
+                if (n < 1 || n > 75)                   
+                    return false;
                 int min = c*15 + 1;
                 int max = c*15 + 15;
                 if (n < min || n > max) return false;
@@ -85,7 +87,7 @@ public class Carton {
         }
         return count == 24;
     }
-
+    
     public boolean[][] getMarcados() { return marcados; }
     public int[][] getNumeros() { return numeros; }
 }

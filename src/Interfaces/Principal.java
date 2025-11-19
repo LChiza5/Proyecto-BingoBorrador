@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Luisk
@@ -15,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -27,10 +30,10 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        BtnJugar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnReglas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,36 +51,37 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(212, 175, 55));
-        jButton2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Jugar");
-        jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton2.setOpaque(true);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnJugar.setBackground(new java.awt.Color(212, 175, 55));
+        BtnJugar.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        BtnJugar.setForeground(new java.awt.Color(0, 0, 0));
+        BtnJugar.setText("Jugar");
+        BtnJugar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BtnJugar.setOpaque(true);
+        BtnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnJugarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 760, 140, 70));
+        getContentPane().add(BtnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 760, 140, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bingo-banner-floating-3d-lotto-game-balls-lotteries-gaming-event-promotion-with-golden-coins-and-falling-confetti-illustration-vector.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 0, 1920, -1));
 
-        jMenu1.setBackground(new java.awt.Color(153, 153, 153));
-        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu1.setText("Reglas");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuBar1.add(jMenu1);
+        mnReglas.setBackground(new java.awt.Color(153, 153, 153));
+        mnReglas.setForeground(new java.awt.Color(0, 0, 0));
+        mnReglas.setText("Reglas");
+        mnReglas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jMenuBar1.add(mnReglas);
 
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BtnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJugarActionPerformed
+        FrmJuego frmJuego = new FrmJuego();
+        frmJuego.setVisible(true);
+    }//GEN-LAST:event_BtnJugarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,10 +119,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BtnJugar;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu mnReglas;
     // End of variables declaration//GEN-END:variables
 }
