@@ -45,14 +45,18 @@ public class FrmJuego extends javax.swing.JFrame {
         imgCarton = new javax.swing.JLabel();
         imgBolas = new javax.swing.JLabel();
         imgFicha = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnAgregarCarton2 = new javax.swing.JButton();
+        btnIniciar = new javax.swing.JButton();
+        btnTxtAnteriorNumero = new javax.swing.JButton();
+        BtnNumeroCantado = new javax.swing.JButton();
+        btnAnteriorNum = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnAutomatico = new javax.swing.JButton();
         btnManual = new javax.swing.JButton();
         btnAgregarCarton = new javax.swing.JButton();
-        btnIniciar = new javax.swing.JButton();
-        btnAutomatico = new javax.swing.JButton();
+        btnTxtCartones = new javax.swing.JButton();
         btnSeleccionarModo = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        btnAgregarCarton1 = new javax.swing.JButton();
-        btnAgregarCarton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -71,6 +75,81 @@ public class FrmJuego extends javax.swing.JFrame {
 
         imgFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ficha-de-casino.png"))); // NOI18N
 
+        btnAgregarCarton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAgregarCarton2.setText("Número");
+        btnAgregarCarton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCarton2ActionPerformed(evt);
+            }
+        });
+
+        btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnIniciar.setText("Iniciar Juego");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+
+        btnTxtAnteriorNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTxtAnteriorNumero.setText("Último Número:");
+        btnTxtAnteriorNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTxtAnteriorNumeroActionPerformed(evt);
+            }
+        });
+
+        BtnNumeroCantado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BtnNumeroCantado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNumeroCantadoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(btnAnteriorNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(btnAnteriorNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+
+        btnAutomatico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAutomatico.setText("Automatico");
+        btnAutomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutomaticoActionPerformed(evt);
+            }
+        });
+
         btnManual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnManual.setText("Manual");
         btnManual.addActionListener(new java.awt.event.ActionListener() {
@@ -87,130 +166,106 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
-        btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnIniciar.setText("Iniciar Juego");
-        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+        btnTxtCartones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTxtCartones.setText("Anterior Número:");
+        btnTxtCartones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarActionPerformed(evt);
+                btnTxtCartonesActionPerformed(evt);
             }
         });
 
-        btnAutomatico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAutomatico.setText("Automatico");
-        btnAutomatico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAutomaticoActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnManual)
+                        .addGap(37, 37, 37)
+                        .addComponent(btnAutomatico)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAgregarCarton)
+                        .addGap(83, 83, 83))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(btnTxtCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(btnTxtCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnManual, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
 
         btnSeleccionarModo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnSeleccionarModo.setText("Selecciona el Modo:");
+        btnSeleccionarModo.setText("Modo de juego");
         btnSeleccionarModo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarModoActionPerformed(evt);
             }
         });
 
-        btnAgregarCarton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAgregarCarton1.setText("Último Número:");
-        btnAgregarCarton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCarton1ActionPerformed(evt);
-            }
-        });
-
-        btnAgregarCarton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAgregarCarton2.setText("Número");
-        btnAgregarCarton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCarton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAgregarCarton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregarCarton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(266, Short.MAX_VALUE))
-        );
-
         DesktopJuego.setLayer(imgCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(imgBolas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(imgFicha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnManual, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnAgregarCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnIniciar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnAutomatico, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnSeleccionarModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(btnSeleccionarModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DesktopJuegoLayout = new javax.swing.GroupLayout(DesktopJuego);
         DesktopJuego.setLayout(DesktopJuegoLayout);
         DesktopJuegoLayout.setHorizontalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                .addGap(0, 593, Short.MAX_VALUE)
-                .addComponent(imgBolas)
-                .addGap(296, 296, 296)
-                .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DesktopJuegoLayout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(238, 238, 238)))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnSeleccionarModo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnManual)
+                        .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAutomatico))
+                        .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                        .addComponent(imgBolas)
+                        .addGap(296, 296, 296)
+                        .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAgregarCarton)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         DesktopJuegoLayout.setVerticalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgBolas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 19, Short.MAX_VALUE)
-                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imgBolas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                                .addContainerGap(12, Short.MAX_VALUE)
+                                .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -341,15 +396,15 @@ public class FrmJuego extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Modo de juego seleccionado: " + seleccion);
     }//GEN-LAST:event_btnSeleccionarModoActionPerformed
 
-    private void btnAgregarCarton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton1ActionPerformed
+    private void BtnNumeroCantadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNumeroCantadoActionPerformed
          int ultimo = contrlPrin.getUltimoNumero();
 
         if (ultimo == -1) {
             JOptionPane.showMessageDialog(this, "Todavía no se ha cantado ningún número.");
         } else {
-            JOptionPane.showMessageDialog(this, "El último número cantado es: " + ultimo);
+            JOptionPane.showMessageDialog(this, ultimo);
         }
-    }//GEN-LAST:event_btnAgregarCarton1ActionPerformed
+    }//GEN-LAST:event_BtnNumeroCantadoActionPerformed
 
     private void btnAgregarCarton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton2ActionPerformed
          int numero = contrlPrin.sacarNumeroAuto();
@@ -357,7 +412,7 @@ public class FrmJuego extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ya no hay más números disponibles.");
             return;
         }
-        btnAgregarCarton1.setText("Último Número: " + numero);
+        BtnNumeroCantado.setText(String.valueOf(numero));
         verificarGanadores();
     }//GEN-LAST:event_btnAgregarCarton2ActionPerformed
 
@@ -381,11 +436,19 @@ contrlPrin.registrarObserver(frmTablero);
     }
 
     contrlPrin.reiniciarJuego();
-    btnAgregarCarton1.setText("Último Número:");
+    BtnNumeroCantado.setText("Último Número:");
 
     JOptionPane.showMessageDialog(this, 
         "Juego iniciado. Presione \"Número\" para cantar bolas.");
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnTxtAnteriorNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTxtAnteriorNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTxtAnteriorNumeroActionPerformed
+
+    private void btnTxtCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTxtCartonesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTxtCartonesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,17 +456,21 @@ contrlPrin.registrarObserver(frmTablero);
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnNumeroCantado;
     private javax.swing.JDesktopPane DesktopJuego;
     private javax.swing.JButton btnAgregarCarton;
-    private javax.swing.JButton btnAgregarCarton1;
     private javax.swing.JButton btnAgregarCarton2;
+    private javax.swing.JButton btnAnteriorNum;
     private javax.swing.JButton btnAutomatico;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnManual;
     private javax.swing.JButton btnSeleccionarModo;
+    private javax.swing.JButton btnTxtAnteriorNumero;
+    private javax.swing.JButton btnTxtCartones;
     private javax.swing.JLabel imgBolas;
     private javax.swing.JLabel imgCarton;
     private javax.swing.JLabel imgFicha;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
