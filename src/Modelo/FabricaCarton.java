@@ -4,7 +4,10 @@
  */
 package Modelo;
 
-import Controlador.Utilidades;
+
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -12,28 +15,44 @@ import Controlador.Utilidades;
  */
 public class FabricaCarton {
 
+    private static final Set<String> idsGenerados = new HashSet<>();
+
+    private static String generarID() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random r = new Random();
+        String id;
+
+        do {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                sb.append(chars.charAt(r.nextInt(chars.length())));
+            }
+            id = sb.toString();
+        } while (idsGenerados.contains(id));
+
+        idsGenerados.add(id);
+        return id;
+    }
+
     public static Carton crear(String tipo) {
+
+        // 👇 AQUI CAMBIAMOS LA GENERACIÓN DEL ID
+        String id = generarID();
 
         switch (tipo.toUpperCase()) {
 
             case "MANUAL" -> {
-                // El formulario lo va a llenar luego
-                String id = "C" + System.currentTimeMillis();
                 return new Carton(id);
             }
 
             case "AUTO" -> {
-                String id = "C" + System.currentTimeMillis();
                 Carton c = new Carton(id);
 
                 int[][] nums = GeneradorAutomatico.generar();
 
-                // Insertar uno por uno porque tu Carton NO tiene setNumeros()
                 for (int r = 0; r < 5; r++) {
                     for (int col = 0; col < 5; col++) {
-
-                        if (r == 2 && col == 2) continue; // centro libre
-
+                        if (r == 2 && col == 2) continue;
                         c.setNumero(r, col, nums[r][col]);
                     }
                 }
@@ -47,4 +66,3 @@ public class FabricaCarton {
         }
     }
 }
-

@@ -417,16 +417,7 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarCarton2ActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-   if (frmTablero.getParent() == null) {
-    DesktopJuego.add(frmTablero);
-    frmTablero.setVisible(true);
-    frmTablero.setLocation(600, 20);
-}
-
-// DESPUÉS registrar como observer
-contrlPrin.registrarObserver(frmTablero);
-
-    if (frmCartones.isEmpty()) {
+ if (frmCartones.isEmpty()) {
         JOptionPane.showMessageDialog(this, 
             "Debe agregar al menos un cartón antes de iniciar.", 
             "Atención", 
@@ -435,6 +426,17 @@ contrlPrin.registrarObserver(frmTablero);
         return;
     }
 
+    // Registrar observer SOLO UNA VEZ
+    if (frmTablero.getParent() == null) {
+        DesktopJuego.add(frmTablero);
+        frmTablero.pack();
+        frmTablero.setBounds(600, 20, 500, 700);
+        frmTablero.setVisible(true);
+
+        contrlPrin.registrarObserver(frmTablero);
+    }
+
+    // Reiniciar juego SOLO UNA VEZ
     contrlPrin.reiniciarJuego();
     BtnNumeroCantado.setText("Último Número:");
 
