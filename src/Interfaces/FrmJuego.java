@@ -48,13 +48,16 @@ public class FrmJuego extends javax.swing.JFrame {
         imgCarton = new javax.swing.JLabel();
         imgBolas = new javax.swing.JLabel();
         imgFicha = new javax.swing.JLabel();
-        txtModo = new javax.swing.JTextField();
         btnManual = new javax.swing.JButton();
         btnAgregarCarton = new javax.swing.JButton();
-        txtCantidadCartones = new javax.swing.JTextField();
         ComboCartones = new javax.swing.JComboBox<>();
         btnIniciar = new javax.swing.JButton();
         btnAutomatico = new javax.swing.JButton();
+        btnCantidadCartones = new javax.swing.JButton();
+        btnSeleccionarModo = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnAgregarCarton1 = new javax.swing.JButton();
+        btnAgregarCarton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,14 +76,6 @@ public class FrmJuego extends javax.swing.JFrame {
 
         imgFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ficha-de-casino.png"))); // NOI18N
 
-        txtModo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtModo.setText("Seleccionar  modo: ");
-        txtModo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModoActionPerformed(evt);
-            }
-        });
-
         btnManual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnManual.setText("Manual");
         btnManual.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +92,13 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
-        txtCantidadCartones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtCantidadCartones.setText("Cantidad de cartones:");
-
         ComboCartones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         ComboCartones.setToolTipText("");
+        ComboCartones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboCartonesActionPerformed(evt);
+            }
+        });
 
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnIniciar.setText("Iniciar Juego");
@@ -114,52 +111,107 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
+        btnCantidadCartones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCantidadCartones.setText("Cantidad de Cartones:");
+        btnCantidadCartones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCantidadCartonesActionPerformed(evt);
+            }
+        });
+
+        btnSeleccionarModo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSeleccionarModo.setText("Selecciona el Modo:");
+        btnSeleccionarModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarModoActionPerformed(evt);
+            }
+        });
+
+        btnAgregarCarton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAgregarCarton1.setText("Último Número:");
+        btnAgregarCarton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCarton1ActionPerformed(evt);
+            }
+        });
+
+        btnAgregarCarton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAgregarCarton2.setText("Número");
+        btnAgregarCarton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCarton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAgregarCarton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarCarton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarCarton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(266, Short.MAX_VALUE))
+        );
+
         DesktopJuego.setLayer(imgCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(imgBolas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(imgFicha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(txtModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnManual, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnAgregarCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(txtCantidadCartones, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(ComboCartones, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnIniciar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnAutomatico, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(btnCantidadCartones, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(btnSeleccionarModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DesktopJuegoLayout = new javax.swing.GroupLayout(DesktopJuego);
         DesktopJuego.setLayout(DesktopJuegoLayout);
         DesktopJuegoLayout.setHorizontalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtModo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(0, 383, Short.MAX_VALUE)
-                        .addComponent(imgBolas)
-                        .addGap(296, 296, 296)
-                        .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addComponent(btnManual)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAutomatico)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(0, 593, Short.MAX_VALUE)
+                .addComponent(imgBolas)
+                .addGap(296, 296, 296)
+                .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnSeleccionarModo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnManual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAutomatico))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCantidadCartones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ComboCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 1388, Short.MAX_VALUE))
+                    .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DesktopJuegoLayout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                                    .addComponent(btnCantidadCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(ComboCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         DesktopJuegoLayout.setVerticalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,17 +223,19 @@ public class FrmJuego extends javax.swing.JFrame {
                     .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtModo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnManual, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidadCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCantidadCartones, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,10 +254,6 @@ public class FrmJuego extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModoActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int r = JOptionPane.showConfirmDialog(this, "¿Desea volver a la página principal?", "Alerta!", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
@@ -215,7 +265,9 @@ public class FrmJuego extends javax.swing.JFrame {
 
     private void btnAgregarCartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCartonActionPerformed
         String id=null;
-        if (this.tipoCarton) {
+        int veces = ComboCartones.getSelectedIndex() + 1;
+        for (int i = 0; i < veces; i++) {
+        if (this.tipoCarton) {   
             id =this.contrlPrin.agregarCartonAutomatico();
         }else{
             id =this.contrlPrin.agregarCartonManual();
@@ -226,7 +278,7 @@ public class FrmJuego extends javax.swing.JFrame {
             this.DesktopJuego.add(nuevoCarton);
             nuevoCarton.setVisible(true);
         
-
+        }
     }//GEN-LAST:event_btnAgregarCartonActionPerformed
 
     private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
@@ -243,6 +295,26 @@ public class FrmJuego extends javax.swing.JFrame {
         this.tipoCarton = true;
     }//GEN-LAST:event_btnAutomaticoActionPerformed
 
+    private void ComboCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCartonesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboCartonesActionPerformed
+
+    private void btnCantidadCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadCartonesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCantidadCartonesActionPerformed
+
+    private void btnSeleccionarModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarModoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarModoActionPerformed
+
+    private void btnAgregarCarton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarCarton1ActionPerformed
+
+    private void btnAgregarCarton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarCarton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,13 +324,16 @@ public class FrmJuego extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboCartones;
     private javax.swing.JDesktopPane DesktopJuego;
     private javax.swing.JButton btnAgregarCarton;
+    private javax.swing.JButton btnAgregarCarton1;
+    private javax.swing.JButton btnAgregarCarton2;
     private javax.swing.JButton btnAutomatico;
+    private javax.swing.JButton btnCantidadCartones;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnManual;
+    private javax.swing.JButton btnSeleccionarModo;
     private javax.swing.JLabel imgBolas;
     private javax.swing.JLabel imgCarton;
     private javax.swing.JLabel imgFicha;
-    private javax.swing.JTextField txtCantidadCartones;
-    private javax.swing.JTextField txtModo;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
