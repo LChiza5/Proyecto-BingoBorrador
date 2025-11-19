@@ -9,5 +9,5 @@ package Modelo;
  * @author ilope
  */
 public interface StrategyGanador {
-     boolean esGanador(Carton c);
+     boolean esGanador(Carton carton);
 }

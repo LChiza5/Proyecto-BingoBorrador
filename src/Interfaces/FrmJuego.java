@@ -4,16 +4,13 @@
  */
 package Interfaces;
 
-import Controlador.ControladorCarton;
-import Controlador.ControladorPrincipal;
-import Controlador.ControladorTombola;
+
+import Controlador.ControladorJuego;
 import Modelo.Carton;
-import java.awt.Color;
-import static java.awt.Color.WHITE;
-import static java.awt.Color.YELLOW;
+import Modelo.ModoJuego;
 import java.util.HashSet;
+import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,11 +19,11 @@ import javax.swing.JOptionPane;
  */
 public class FrmJuego extends javax.swing.JFrame {
 
-    private final ControladorPrincipal contrlPrin = new ControladorPrincipal();
-    private final ControladorCarton contrlCart = new ControladorCarton();
-    private final ControladorTombola contrlTomb = new ControladorTombola();
-    private boolean tipoCarton = true;
-    private HashSet<FrmCarton> frmCartones = new HashSet();
+    private final ControladorJuego contrlPrin = new ControladorJuego();
+    private boolean tipoCarton = true; 
+    private HashSet<FrmCarton> frmCartones = new HashSet<>();
+    private final FrmTableroo frmTablero = new FrmTableroo();
+
     /**
      * Creates new form FrmJuego
      */
@@ -50,10 +47,8 @@ public class FrmJuego extends javax.swing.JFrame {
         imgFicha = new javax.swing.JLabel();
         btnManual = new javax.swing.JButton();
         btnAgregarCarton = new javax.swing.JButton();
-        ComboCartones = new javax.swing.JComboBox<>();
         btnIniciar = new javax.swing.JButton();
         btnAutomatico = new javax.swing.JButton();
-        btnCantidadCartones = new javax.swing.JButton();
         btnSeleccionarModo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnAgregarCarton1 = new javax.swing.JButton();
@@ -85,37 +80,26 @@ public class FrmJuego extends javax.swing.JFrame {
         });
 
         btnAgregarCarton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAgregarCarton.setText("Agregar");
+        btnAgregarCarton.setText("Agregar Carton");
         btnAgregarCarton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarCartonActionPerformed(evt);
             }
         });
 
-        ComboCartones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        ComboCartones.setToolTipText("");
-        ComboCartones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboCartonesActionPerformed(evt);
-            }
-        });
-
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnIniciar.setText("Iniciar Juego");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
 
         btnAutomatico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnAutomatico.setText("Automatico");
         btnAutomatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAutomaticoActionPerformed(evt);
-            }
-        });
-
-        btnCantidadCartones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnCantidadCartones.setText("Cantidad de Cartones:");
-        btnCantidadCartones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCantidadCartonesActionPerformed(evt);
             }
         });
 
@@ -169,10 +153,8 @@ public class FrmJuego extends javax.swing.JFrame {
         DesktopJuego.setLayer(imgFicha, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnManual, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnAgregarCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(ComboCartones, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnIniciar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnAutomatico, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnCantidadCartones, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(btnSeleccionarModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -188,13 +170,6 @@ public class FrmJuego extends javax.swing.JFrame {
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnSeleccionarModo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnManual)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAutomatico))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -203,14 +178,18 @@ public class FrmJuego extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DesktopJuegoLayout.createSequentialGroup()
                             .addGap(14, 14, 14)
-                            .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                                    .addComponent(btnCantidadCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(ComboCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(238, 238, 238)))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnSeleccionarModo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnManual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAutomatico))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAgregarCarton)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         DesktopJuegoLayout.setVerticalGroup(
@@ -222,16 +201,14 @@ public class FrmJuego extends javax.swing.JFrame {
                     .addComponent(imgBolas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnManual, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnManual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCantidadCartones, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addComponent(btnAgregarCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,7 +230,31 @@ public class FrmJuego extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void actualizarCartonesConNumero(int numero) {
+        for (FrmCarton frm : frmCartones) {
+            frm.pintarCarton(numero);
+        }
+    }
 
+    private void verificarGanadores() {
+        List<Carton> cartones = contrlPrin.listarCartones();
+        StringBuilder ganadores = new StringBuilder();
+
+        for (Carton c : cartones) {
+            if (contrlPrin.esGanador(c)) {
+                ganadores.append("Cartón ID: ").append(c.getId()).append("\n");
+            }
+        }
+
+        if (ganadores.length() > 0) {
+            JOptionPane.showMessageDialog(
+                this,
+                "¡TENEMOS GANADOR(ES)!\n\n" + ganadores,
+                "Ganador",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
+    }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int r = JOptionPane.showConfirmDialog(this, "¿Desea volver a la página principal?", "Alerta!", JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
@@ -264,21 +265,39 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAgregarCartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCartonActionPerformed
-        String id=null;
-        int veces = ComboCartones.getSelectedIndex() + 1;
-        for (int i = 0; i < veces; i++) {
-        if (this.tipoCarton) {   
-            id =this.contrlPrin.agregarCartonAutomatico();
-        }else{
-            id =this.contrlPrin.agregarCartonManual();
-        }
-            Carton carton = this.contrlPrin.buscarCarton(id);
-            FrmCarton nuevoCarton = new FrmCarton(this.contrlPrin);
-            nuevoCarton.llenarCarton(carton.getNumeros(), id);
-            this.DesktopJuego.add(nuevoCarton);
-            nuevoCarton.setVisible(true);
-        
-        }
+      String id;
+
+    if (tipoCarton) {
+        id = contrlPrin.agregarCartonAutomatico();
+    } else {
+        id = contrlPrin.agregarCartonManual();
+    }
+
+    Carton carton = contrlPrin.buscarCarton(id);
+
+    // Crear la ventana del cartón
+    FrmCarton nuevoCarton = new FrmCarton(contrlPrin);
+    DesktopJuego.add(nuevoCarton);
+
+    // --- AUTO ---
+    if (tipoCarton) {
+        nuevoCarton.llenarCarton(carton.getNumeros(), id);
+    } 
+    // --- MANUAL ---
+    else {
+        nuevoCarton.habilitarModoManual();
+        nuevoCarton.setId(id); 
+    }
+
+    // Mostrarlo
+    nuevoCarton.setVisible(true);
+
+    // Registrar observer UNA VEZ
+    contrlPrin.registrarObserver(nuevoCarton);
+
+    // Guardarlo
+    frmCartones.add(nuevoCarton);
+
     }//GEN-LAST:event_btnAgregarCartonActionPerformed
 
     private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
@@ -295,25 +314,78 @@ public class FrmJuego extends javax.swing.JFrame {
         this.tipoCarton = true;
     }//GEN-LAST:event_btnAutomaticoActionPerformed
 
-    private void ComboCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCartonesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboCartonesActionPerformed
-
-    private void btnCantidadCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadCartonesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCantidadCartonesActionPerformed
-
     private void btnSeleccionarModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarModoActionPerformed
-        // TODO add your handling code here:
+        String[] opciones = { "Normal", "Cuatro esquinas", "Cartón lleno" };
+
+        String seleccion = (String) JOptionPane.showInputDialog(
+            this,
+            "Seleccione el modo de juego:",
+            "Modo de juego",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            opciones,
+            opciones[0]
+        );
+
+        if (seleccion == null) return;
+
+        switch (seleccion) {
+            case "Normal" ->
+                contrlPrin.setModo(ModoJuego.NORMAL);
+            case "Cuatro esquinas" ->
+                contrlPrin.setModo(ModoJuego.CUATRO_ESQUINAS);
+            case "Cartón lleno" ->
+                contrlPrin.setModo(ModoJuego.CARTON_LLENO);
+        }
+
+        JOptionPane.showMessageDialog(this, "Modo de juego seleccionado: " + seleccion);
     }//GEN-LAST:event_btnSeleccionarModoActionPerformed
 
     private void btnAgregarCarton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton1ActionPerformed
-        // TODO add your handling code here:
+         int ultimo = contrlPrin.getUltimoNumero();
+
+        if (ultimo == -1) {
+            JOptionPane.showMessageDialog(this, "Todavía no se ha cantado ningún número.");
+        } else {
+            JOptionPane.showMessageDialog(this, "El último número cantado es: " + ultimo);
+        }
     }//GEN-LAST:event_btnAgregarCarton1ActionPerformed
 
     private void btnAgregarCarton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarton2ActionPerformed
-        // TODO add your handling code here:
+         int numero = contrlPrin.sacarNumeroAuto();
+        if (numero == -1) {
+            JOptionPane.showMessageDialog(this, "Ya no hay más números disponibles.");
+            return;
+        }
+        btnAgregarCarton1.setText("Último Número: " + numero);
+        verificarGanadores();
     }//GEN-LAST:event_btnAgregarCarton2ActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+   if (frmTablero.getParent() == null) {
+    DesktopJuego.add(frmTablero);
+    frmTablero.setVisible(true);
+    frmTablero.setLocation(600, 20);
+}
+
+// DESPUÉS registrar como observer
+contrlPrin.registrarObserver(frmTablero);
+
+    if (frmCartones.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Debe agregar al menos un cartón antes de iniciar.", 
+            "Atención", 
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    contrlPrin.reiniciarJuego();
+    btnAgregarCarton1.setText("Último Número:");
+
+    JOptionPane.showMessageDialog(this, 
+        "Juego iniciado. Presione \"Número\" para cantar bolas.");
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,13 +393,11 @@ public class FrmJuego extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboCartones;
     private javax.swing.JDesktopPane DesktopJuego;
     private javax.swing.JButton btnAgregarCarton;
     private javax.swing.JButton btnAgregarCarton1;
     private javax.swing.JButton btnAgregarCarton2;
     private javax.swing.JButton btnAutomatico;
-    private javax.swing.JButton btnCantidadCartones;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnManual;
     private javax.swing.JButton btnSeleccionarModo;

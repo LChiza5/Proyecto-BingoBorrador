@@ -22,9 +22,9 @@ public class Juego implements Observer {
     }
 
     private final List<Carton> cartones = new ArrayList<>();
-    private final Tombola tombola = new Tombola();
-    private StrategyGanador estrategia = new Strategy();
-    private final VerificadorGanador verificador = new VerificadorGanador(estrategia);
+    private final Tombola tombola = Tombola.getInstance();
+    private StrategyGanador estrategia = new ModoNormal();
+private final VerificadorGanador verificador = new VerificadorGanador(estrategia);
 
     private int ultimoNumero = -1;
     private boolean enRonda = false;
@@ -89,7 +89,7 @@ public class Juego implements Observer {
         }
     }
 
-    @Override
+    
     public void onGanadores(List<Carton> ganadores) {
         // para expansión futura
     }
@@ -105,5 +105,21 @@ public class Juego implements Observer {
 }
 public int getUltimoNumero() {
     return ultimoNumero;
+}
+public void modoNormal() {
+    setEstrategia(new ModoNormal());
+}
+
+// Cambiar a CUATRO ESQUINAS
+public void modoCuatroEsquinas() {
+    setEstrategia(new StrategyCuatroEsquinas());
+}
+
+// Cambiar a CARTÓN LLENO
+public void modoCartonLleno() {
+    setEstrategia(new StrategyCartonLleno());
+}
+public Tombola getTombola() {
+    return tombola;
 }
 }

@@ -6,11 +6,13 @@ package Modelo;
 
 import java.util.List;
 
+
+
 /**
  *
  * @author ilope
  */
 public interface Observer {
-     void onNumeroCantado(int numero);
-    void onGanadores(List<Carton> ganadores);
+      void onNumeroCantado(int numero);
+      void onGanadores(List<Carton> ganadores);
 }

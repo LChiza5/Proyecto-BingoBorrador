@@ -11,7 +11,18 @@ package Modelo;
 public class StrategyCartonLleno implements StrategyGanador {
     @Override
     public boolean esGanador(Carton c) {
-        for (int r=0;r<5;r++) for (int co=0;co<5;co++) if (!c.isMarcado(r,co)) return false;
+        boolean[][] m = c.getMarcados();
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                // Saltar la casilla central (FREE)
+                if (i == 2 && j == 2) continue;
+
+                if (!m[i][j]) return false;
+            }
+        }
+
         return true;
     }
 }

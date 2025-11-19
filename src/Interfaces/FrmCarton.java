@@ -4,8 +4,11 @@
  */
 package Interfaces;
 
-import Controlador.ControladorPrincipal;
+import Controlador.ControladorJuego;
+import Modelo.Carton;
+import Modelo.Observer;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -14,15 +17,15 @@ import javax.swing.JOptionPane;
  *
  * @author sebas
  */
-public class FrmCarton extends javax.swing.JInternalFrame {
+public class FrmCarton extends javax.swing.JInternalFrame implements Observer{
 
-    private ControladorPrincipal contrlPrin;
+    private ControladorJuego contrlPrin;
     private JButton[][] botones;
     /**
      * Creates new form FrmCarton
      * @param contrlPrin
      */
-    public FrmCarton(ControladorPrincipal contrlPrin) {
+    public FrmCarton(ControladorJuego contrlPrin) {
         initComponents();
         
         this.contrlPrin = contrlPrin;
@@ -36,6 +39,13 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     };
     }
     
+    public void limpiarColores() {
+    for (int i = 0; i < botones.length; i++) {
+        for (int j = 0; j < botones[i].length; j++) {
+            botones[i][j].setBackground(Color.WHITE);
+        }
+    }
+}
 
     
     public void llenarCarton(int[][] v, String id ){
@@ -74,7 +84,92 @@ public class FrmCarton extends javax.swing.JInternalFrame {
             }
          }
     }
-    
+  public void habilitarModoManual() {
+
+    for (int fila = 0; fila < botones.length; fila++) {
+        for (int col = 0; col < botones[fila].length; col++) {
+
+            JButton btn = botones[fila][col];
+
+            // ---- RESETEO TOTAL ----
+            btn.setText("");
+            btn.setBackground(Color.WHITE);
+
+            // remover ActionListeners anteriores (NECESARIO)
+            for (var al : btn.getActionListeners()) {
+                btn.removeActionListener(al);
+            }
+
+            final int f = fila;
+            final int c = col;
+
+            btn.addActionListener(e -> {
+                String txt = JOptionPane.showInputDialog(
+                    this,
+                    "Ingrese un número válido"
+                );
+
+                if (txt == null || txt.isEmpty()) return;
+
+                try {
+                    int n = Integer.parseInt(txt);
+
+                    // Validación general
+                    if (n < 1 || n > 75) {
+                        JOptionPane.showMessageDialog(this, "Debe ser entre 1 y 75");
+                        return;
+                    }
+
+                    // Validación por columna B I N G O
+                    int min = c * 15 + 1;
+                    int max = (c + 1) * 15;
+
+                    if (n < min || n > max) {
+                        JOptionPane.showMessageDialog(this,
+                            "Columna " + "BINGO".charAt(c) + " usa números " + min + " a " + max);
+                        return;
+                    }
+
+                    // Validación de repetidos
+                    if (numeroRepetidoEnCarton(n, f, c)) {
+                        JOptionPane.showMessageDialog(this, "Número repetido en el cartón.");
+                        return;
+                    }
+
+                    // Establecer número sin marcar color
+                    btn.setText(String.valueOf(n));
+                    btn.setBackground(Color.WHITE);
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Debe ser un número.");
+                }
+            });
+        }
+    }
+
+    // Forzar que el FREE SPACE sea 0
+    botones[2][2].setText("0");
+    botones[2][2].setBackground(Color.WHITE);
+}
+
+private boolean numeroRepetidoEnCarton(int n, int filaActual, int colActual) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+
+            if (i == filaActual && j == colActual) continue;
+
+            String txt = botones[i][j].getText();
+            if (!txt.isEmpty() && Integer.parseInt(txt) == n) return true;
+        }
+    }
+    return false;
+}
+public void setId(String id) {
+    btnId.setText(id);
+}
+
+
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -405,9 +500,9 @@ public class FrmCarton extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(btnId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b0_0, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -563,15 +658,16 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_b0_4ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        int r = JOptionPane.showConfirmDialog(this, "Quieres borrar el cartón con ID: "+btnId.getText(), "Borrar Cartón!", JOptionPane.YES_NO_OPTION);
-        
-        if (r == JOptionPane.YES_OPTION) {
-            this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-            this.contrlPrin.eliminarCarton(btnId.getText());
-            
-        }else{
-            this.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-        }
+         int r = JOptionPane.showConfirmDialog(this, "Quieres borrar el cartón con ID: "+btnId.getText(), "Borrar Cartón!", JOptionPane.YES_NO_OPTION);
+
+    if (r == JOptionPane.YES_OPTION) {
+        contrlPrin.eliminarObserver(this);
+        contrlPrin.eliminarCarton(btnId.getText());
+        this.dispose();
+    } else {
+        setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+    }
+    
     }//GEN-LAST:event_formInternalFrameClosing
 
 
@@ -608,4 +704,14 @@ public class FrmCarton extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onNumeroCantado(int numero) {
+         pintarCarton(numero);
+    }
+
+    @Override
+    public void onGanadores(List<Carton> ganadores) {
+        
+    }
 }

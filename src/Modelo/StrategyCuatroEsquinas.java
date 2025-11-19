@@ -9,8 +9,10 @@ package Modelo;
  * @author ilope
  */
 public class StrategyCuatroEsquinas implements StrategyGanador {
-    @Override
+   @Override
     public boolean esGanador(Carton c) {
-        return c.isMarcado(0,0) && c.isMarcado(0,4) && c.isMarcado(4,0) && c.isMarcado(4,4);
+        boolean[][] m = c.getMarcados();
+
+        return m[0][0] && m[0][4] && m[4][0] && m[4][4];
     }
 }

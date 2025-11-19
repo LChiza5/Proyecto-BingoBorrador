@@ -7,58 +7,80 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 
 /**
  *
  * @author ilope
  */
-public class Tombola {
+public class Tombola extends Notificador {
 
-    private final List<Integer> disponibles = new ArrayList<>();
-    private final List<Integer> salidos = new ArrayList<>();
-    private final List<Observer> observers = new ArrayList<>();
+    private static Tombola instancia;
 
-    public Tombola() { reiniciar(); }
+    private ArrayList<Integer> disponibles;
+    private ArrayList<Integer> salidos;
+
+    private Tombola() {
+        reiniciar();
+    }
+
+    public static Tombola getInstance() {
+        if (instancia == null) instancia = new Tombola();
+        return instancia;
+    }
 
     public void reiniciar() {
-        disponibles.clear();
-        salidos.clear();
-        for (int i=1;i<=75;i++) disponibles.add(i);
+        disponibles = new ArrayList<>();
+        salidos = new ArrayList<>();
+
+        for (int i = 1; i <= 75; i++) disponibles.add(i);
         Collections.shuffle(disponibles);
-        notifyNumero(-1);
     }
 
     public int sacarAleatorio() {
-        if (disponibles.isEmpty()) return -1;
-        int n = disponibles.remove(0);
-        salidos.add(n);
-        notifyNumero(n);
-        return n;
+        if (disponibles.isEmpty()) {
+            notificar(-1); 
+            return -1;
+        }
+
+        int numero = disponibles.remove(0);
+        salidos.add(numero);
+
+        notificar(numero); // 🔥 DELEGADO AL NOTIFICADOR
+
+        return numero;
     }
 
     public boolean ingresarManual(int numero) {
         if (numero < 1 || numero > 75) return false;
-        if (salidos.contains(numero)) return false;
-        boolean removed = disponibles.remove((Integer) numero);
-        if (removed) {
-            salidos.add(numero);
-            notifyNumero(numero);
-        }
-        return removed;
+        if (!disponibles.contains(numero)) return false;
+
+        disponibles.remove((Integer) numero);
+        salidos.add(numero);
+
+        notificar(numero);
+
+        return true;
     }
 
-    public List<Integer> getSalidos() { return new ArrayList<>(salidos); }
-
-    // Observer management
-    public void addObserver(Observer o) { if (!observers.contains(o)) observers.add(o); }
-    public void removeObserver(Observer o) { observers.remove(o); }
-
-    private void notifyNumero(int numero) {
-        for (Observer o : observers) o.onNumeroCantado(numero);
+    public List<Integer> getSalidos() {
+        return Collections.unmodifiableList(salidos);
     }
 
+    public List<Integer> getDisponibles() {
+        return Collections.unmodifiableList(disponibles);
+    }
+
+    public boolean contiene(int numero) {
+        return disponibles.contains(numero);
+    }
+
+    // MANDA LISTA DE GANADORES A TODOS LOS OBSERVERS
     public void notifyGanadores(List<Carton> ganadores) {
-        for (Observer o : observers) o.onGanadores(ganadores);
+        for (Observer o : getObservers()) {
+            o.onGanadores(ganadores);
+        }
     }
+    
 }
+
