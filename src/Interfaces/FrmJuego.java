@@ -292,7 +292,10 @@ public class FrmJuego extends javax.swing.JFrame {
 
         txtDesmarcar.setBackground(new java.awt.Color(51, 0, 0));
         txtDesmarcar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDesmarcar.setForeground(new java.awt.Color(255, 255, 255));
         txtDesmarcar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDesmarcar.setEnabled(false);
+        txtDesmarcar.setOpaque(true);
         txtDesmarcar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDesmarcarActionPerformed(evt);
