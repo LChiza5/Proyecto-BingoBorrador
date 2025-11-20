@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  * @author Luisk
  */
 public class FrmJuego extends javax.swing.JFrame {
-
+    private boolean modoAutomatico = false; // false = manual, true = auto
+    private boolean juegoIniciado = false;
     private final ControladorJuego contrlPrin = new ControladorJuego();
     private boolean tipoCarton = true; 
     private HashSet<FrmCarton> frmCartones = new HashSet<>();
@@ -30,7 +31,7 @@ public class FrmJuego extends javax.swing.JFrame {
     public FrmJuego() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        desactivarTodo();
     }
 
     /**
@@ -43,6 +44,7 @@ public class FrmJuego extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         DesktopJuego = new javax.swing.JDesktopPane();
         imgCarton = new javax.swing.JLabel();
         imgBolas = new javax.swing.JLabel();
@@ -54,6 +56,8 @@ public class FrmJuego extends javax.swing.JFrame {
         btnDesmarcar = new javax.swing.JButton();
         txtDesmarcar = new javax.swing.JTextField();
         btnReiniciar = new javax.swing.JButton();
+        rbtManualJuego = new javax.swing.JRadioButton();
+        rbtAutomaticoJuego = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         btnAutomatico = new javax.swing.JButton();
         btnManual = new javax.swing.JButton();
@@ -120,35 +124,53 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbtManualJuego);
+        rbtManualJuego.setText("Manual");
+        rbtManualJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtManualJuegoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rbtAutomaticoJuego);
+        rbtAutomaticoJuego.setText("Automatico");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAnteriorNum, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnReiniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDesmarcar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDesmarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDesmarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbtManualJuego)
+                            .addComponent(rbtAutomaticoJuego))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbtManualJuego)
+                        .addGap(10, 10, 10)
+                        .addComponent(rbtAutomaticoJuego))
+                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                     .addComponent(btnAnteriorNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -381,7 +403,100 @@ public class FrmJuego extends javax.swing.JFrame {
             frm.pintarCarton(numero);
         }
     }
+    private void configurarModoDeJuego() {
 
+    // Bloquear selección manual/automática del juego
+    rbtManualJuego.setEnabled(false);
+    rbtAutomaticoJuego.setEnabled(false);
+
+    // Activar funciones generales
+    btnAgregarCarton.setEnabled(true);
+    btnDesmarcar.setEnabled(true);
+    btnReiniciar.setEnabled(true);
+
+    // SI EL JUEGO ES MANUAL
+    if (!modoAutomatico) {
+      BtnNumeroCantado.setEnabled(true);
+        // Cartones manuales siempre
+        tipoCarton = false;
+
+        // Mostrar que el cartón es manual
+        btnManual.setEnabled(false);      // activo/seleccionado
+        btnAutomatico.setEnabled(true);   // disponible pero no seleccionado
+
+        // Tómbola manual
+        txtNumeroManual.setEnabled(true);
+        btnSacarManual.setEnabled(true);
+
+        // Desactivar la tómbola automática
+        btnSacar.setEnabled(false);
+    }
+
+    // SI EL JUEGO ES AUTOMÁTICO
+    else {
+      BtnNumeroCantado.setEnabled(true);
+        // Cartones automáticos siempre
+        tipoCarton = true;
+
+        // Mostrar que el cartón es automático
+        btnAutomatico.setEnabled(false);  // activo/seleccionado
+        btnManual.setEnabled(true);       // disponible pero no seleccionado
+
+        // Desactivar entrada manual
+        txtNumeroManual.setEnabled(false);
+        btnSacarManual.setEnabled(false);
+
+        // Activar la tómbola automática
+        btnSacar.setEnabled(true);
+    }
+}
+    private void desactivarFuncionesDelJuego() {
+
+    // Botones relacionados a cartones
+    btnAgregarCarton.setEnabled(false);
+    btnManual.setEnabled(false);
+    btnAutomatico.setEnabled(false);
+
+    // Tombola automática
+    btnSacar.setEnabled(false);
+
+    // Tombola manual
+    txtNumeroManual.setEnabled(false);
+    btnSacarManual.setEnabled(false);
+
+    // Desmarcar
+    btnDesmarcar.setEnabled(false);
+
+    // Reiniciar
+    btnReiniciar.setEnabled(true); // este sí queda habilitado
+    buttonGroup1.clearSelection();
+}
+    private void desactivarTodo() {
+
+    // Botones que deben estar apagados desde el inicio
+    btnAgregarCarton.setEnabled(false);
+    btnDesmarcar.setEnabled(false);
+    btnReiniciar.setEnabled(false);
+    btnSeleccionarModo.setEnabled(false);
+
+    // Tombola
+    btnSacar.setEnabled(false);
+    btnSacarManual.setEnabled(false);
+    BtnNumeroCantado.setEnabled(false);
+
+    // Texto manual de número
+    txtNumeroManual.setEnabled(false);
+
+    // Botones del tipo de cartón
+    btnManual.setEnabled(false);
+    btnAutomatico.setEnabled(false);
+
+    // Texto de desmarcar
+    txtDesmarcar.setEnabled(false);
+
+    // Mostrar texto inicial
+    BtnNumeroCantado.setText("Último Número:");
+}
     private void verificarGanadores() {
         List<Carton> cartones = contrlPrin.listarCartones();
         StringBuilder ganadores = new StringBuilder();
@@ -411,7 +526,16 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAgregarCartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCartonActionPerformed
-      String id;
+      
+        if (!juegoIniciado) {
+    JOptionPane.showMessageDialog(this,
+        "Debe iniciar el juego antes.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
+        String id;
 
     if (tipoCarton) {
         id = contrlPrin.agregarCartonAutomatico();
@@ -447,7 +571,7 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarCartonActionPerformed
 
     private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
-
+       
         btnManual.setEnabled(false);
         btnAutomatico.setEnabled(true);
         this.tipoCarton = false;
@@ -499,6 +623,14 @@ public class FrmJuego extends javax.swing.JFrame {
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
 
+    if (frmCartones.isEmpty()) {
+    JOptionPane.showMessageDialog(this,
+        "Debe agregar al menos un cartón antes de sacar un número.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
     int numero = contrlPrin.sacarNumeroAuto();
     if (numero == -1) {
         JOptionPane.showMessageDialog(this, "Ya no hay más números disponibles.");
@@ -509,31 +641,60 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSacarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
- if (frmCartones.isEmpty()) {
-        JOptionPane.showMessageDialog(this, 
-            "Debe agregar al menos un cartón antes de iniciar.", 
-            "Atención", 
+ 
+    // 1. Validar que haya seleccionado Manual o Automático
+    if (!rbtManualJuego.isSelected() && !rbtAutomaticoJuego.isSelected()) {
+        JOptionPane.showMessageDialog(this,
+            "Debe seleccionar si el juego será Manual o Automático.",
+            "Atención",
             JOptionPane.WARNING_MESSAGE
         );
         return;
     }
 
-    // Registrar observer SOLO UNA VEZ
+    // 2. Establecer el modo de juego
+    modoAutomatico = rbtAutomaticoJuego.isSelected();
+    juegoIniciado = true;
+
+    // 3. Ajustar automáticamente el tipo de cartón según el modo de juego
+    if (modoAutomatico) {
+        // Juego AUTOMÁTICO → Cartones automáticos
+        tipoCarton = true;
+
+        btnAutomatico.setEnabled(false);  // activo
+        btnManual.setEnabled(true);       // disponible pero no activo
+    } else {
+        // Juego MANUAL → Cartones manuales
+        tipoCarton = false;
+
+        btnManual.setEnabled(false);      // activo
+        btnAutomatico.setEnabled(true);   // disponible pero no activo
+    }
+
+    // 4. Configurar las opciones del UI según el modo
+    configurarModoDeJuego();
+
+    // 5. Activar el panel para seleccionar modo de ganar
+    btnSeleccionarModo.setEnabled(true);
+
+    // 6. Mensaje para confirmar
+    JOptionPane.showMessageDialog(this,
+        "Juego iniciado en modo " + (modoAutomatico ? "Automático" : "Manual") + ".",
+        "Listo!",
+        JOptionPane.INFORMATION_MESSAGE
+    );
+
+    // 7. Inicializar tablero solo la primera vez
     if (frmTablero.getParent() == null) {
         DesktopJuego.add(frmTablero);
         frmTablero.pack();
         frmTablero.setBounds(600, 20, 500, 700);
         frmTablero.setVisible(true);
-
-        contrlPrin.registrarObserver(frmTablero);
+        contrlPrin.registrarObserver(frmTablero); // Registrar solo una vez
     }
 
-    // Reiniciar juego SOLO UNA VEZ
-    contrlPrin.reiniciarJuego();
+    // 8. Mostrar texto inicial del número cantado
     BtnNumeroCantado.setText("Último Número:");
-
-    JOptionPane.showMessageDialog(this, 
-        "Juego iniciado. Presione \"Número\" para cantar bolas.");
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnTxtAnteriorNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTxtAnteriorNumeroActionPerformed
@@ -545,7 +706,17 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTxtCartonesActionPerformed
 
     private void btnSacarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarManualActionPerformed
-       String txt = txtNumeroManual.getText().trim();
+       if (frmCartones.isEmpty()) {
+    JOptionPane.showMessageDialog(this,
+        "Debe agregar al menos un cartón antes de sacar un número.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+} 
+       
+       
+        String txt = txtNumeroManual.getText().trim();
 
     if (txt.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -576,7 +747,16 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroManualActionPerformed
 
     private void btnDesmarcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesmarcarActionPerformed
-       String txt = txtDesmarcar.getText().trim();
+       if (!juegoIniciado) {
+    JOptionPane.showMessageDialog(this,
+        "Debe iniciar el juego antes.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
+        
+        String txt = txtDesmarcar.getText().trim();
 
     if (txt.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -606,7 +786,19 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDesmarcarActionPerformed
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-         // REINICIAR MODELO
+      if (frmTablero != null) {
+    frmTablero.limpiarTablero();
+}
+        if (!juegoIniciado) {
+    JOptionPane.showMessageDialog(this,
+        "Debe iniciar el juego antes.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE
+    );
+    return;
+}
+        btnSeleccionarModo.setEnabled(false);
+// REINICIAR MODELO
     contrlPrin.reiniciarJuegoCompleto();
     
     // REINICIAR VISTAS DE CARTONES
@@ -619,11 +811,32 @@ public class FrmJuego extends javax.swing.JFrame {
         frmTablero.limpiarTablero();
     }
 
-    // REINICIAR TEXTO DEL ÚLTIMO NÚMERO
     BtnNumeroCantado.setText("Último Número:");
 
-    JOptionPane.showMessageDialog(this, "El juego ha sido reiniciado.");
+    // 5. Permitir elegir tipo de juego otra vez
+    rbtManualJuego.setEnabled(true);
+    rbtAutomaticoJuego.setEnabled(true);
+
+    
+
+    // 7. Desactivar todas las funciones hasta iniciar de nuevo
+    desactivarFuncionesDelJuego();
+
+    // 8. Marcar estado general del juego como NO iniciado
+    juegoIniciado = false;
+
+    JOptionPane.showMessageDialog(this,
+        "Juego reiniciado. Seleccione nuevamente si jugará Manual o Automático.",
+        "Reiniciado",
+        JOptionPane.INFORMATION_MESSAGE
+    );
+    buttonGroup1.clearSelection();
+
     }//GEN-LAST:event_btnReiniciarActionPerformed
+
+    private void rbtManualJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtManualJuegoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtManualJuegoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -645,6 +858,7 @@ public class FrmJuego extends javax.swing.JFrame {
     private javax.swing.JButton btnSeleccionarModo;
     private javax.swing.JButton btnTxtAnteriorNumero;
     private javax.swing.JButton btnTxtCartones;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel imgBolas;
     private javax.swing.JLabel imgCarton;
     private javax.swing.JLabel imgFicha;
@@ -652,6 +866,8 @@ public class FrmJuego extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblTombola;
     private javax.swing.JPanel panelTombola;
+    private javax.swing.JRadioButton rbtAutomaticoJuego;
+    private javax.swing.JRadioButton rbtManualJuego;
     private javax.swing.JTextField txtDesmarcar;
     private javax.swing.JTextField txtNumeroManual;
     // End of variables declaration//GEN-END:variables
