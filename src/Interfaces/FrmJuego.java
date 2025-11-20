@@ -267,6 +267,7 @@ public class FrmJuego extends javax.swing.JFrame {
         txtNumeroManual.setBackground(new java.awt.Color(51, 0, 0));
         txtNumeroManual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumeroManual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNumeroManual.setEnabled(false);
         txtNumeroManual.setOpaque(true);
         txtNumeroManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

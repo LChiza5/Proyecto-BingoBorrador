@@ -516,6 +516,7 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Events>
