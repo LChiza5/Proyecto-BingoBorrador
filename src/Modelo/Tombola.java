@@ -81,6 +81,19 @@ public class Tombola extends Notificador {
             o.onGanadores(ganadores);
         }
     }
-    
+    public void desmarcarNumero(int n) {
+
+    // Si el número estaba en salidos → lo sacamos
+    if (salidos.contains(n)) {
+        salidos.remove((Integer)n);
+    }
+
+    // Si no está en disponibles → volver a ponerlo
+    if (!disponibles.contains(n)) {
+        disponibles.add(n);
+        Collections.shuffle(disponibles); // para mantener aleatoriedad
+    }
+}
+
 }
 

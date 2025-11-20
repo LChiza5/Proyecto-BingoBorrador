@@ -115,10 +115,13 @@ public void eliminarObserver(Observer o) {
     juego.getTombola().removeObserver(o);
 }
 public void desmarcarNumero(int n) {
+ 
     for (Carton c : juego.getCartones()) {
         c.desmarcar(n);
     }
+    juego.getTombola().desmarcarNumero(n);
 }
+
 public void reiniciarJuegoCompleto() {
     juego.iniciarRonda(); // Reinicia tómbola
 

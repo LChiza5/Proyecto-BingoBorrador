@@ -63,6 +63,25 @@ public void desmarcarNumero(int numero) {
         lbl.setBackground(Color.WHITE);
     }
 }
+public void marcarNumeroAnterior(int numero) {
+    if (numero < 1 || numero > 75) return;
+
+    JLabel lbl = tablero[numero - 1];
+    if (lbl != null) {
+        lbl.setOpaque(true);
+        lbl.setBackground(new Color(255, 204, 0)); // Amarillo dorado
+    }
+}
+public void marcarNumeroActual(int numero) {
+    if (numero < 1 || numero > 75) return;
+
+    JLabel lbl = tablero[numero - 1];
+    if (lbl != null) {
+        lbl.setOpaque(true);
+        lbl.setBackground(new Color(255, 51, 51)); // Rojo
+    }
+}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

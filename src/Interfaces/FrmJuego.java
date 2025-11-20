@@ -24,7 +24,8 @@ public class FrmJuego extends javax.swing.JFrame {
     private boolean tipoCarton = true; 
     private HashSet<FrmCarton> frmCartones = new HashSet<>();
     private final FrmTableroo frmTablero = new FrmTableroo();
-
+    private int numeroActual = -1;
+    private int numeroAnterior = -1;
     /**
      * Creates new form FrmJuego
      */
@@ -412,6 +413,7 @@ public class FrmJuego extends javax.swing.JFrame {
     // Activar funciones generales
     btnAgregarCarton.setEnabled(true);
     btnDesmarcar.setEnabled(true);
+    txtDesmarcar.setEnabled(true);
     btnReiniciar.setEnabled(true);
 
     // SI EL JUEGO ES MANUAL
@@ -437,7 +439,8 @@ public class FrmJuego extends javax.swing.JFrame {
       BtnNumeroCantado.setEnabled(true);
         // Cartones automáticos siempre
         tipoCarton = true;
-
+        txtDesmarcar.setEnabled(true);
+        btnDesmarcar.setEnabled(true);
         // Mostrar que el cartón es automático
         btnAutomatico.setEnabled(false);  // activo/seleccionado
         btnManual.setEnabled(true);       // disponible pero no seleccionado
@@ -622,20 +625,29 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNumeroCantadoActionPerformed
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
+if (frmCartones.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+            "Debe agregar al menos un cartón antes de sacar un número.",
+            "Advertencia",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
 
-    if (frmCartones.isEmpty()) {
-    JOptionPane.showMessageDialog(this,
-        "Debe agregar al menos un cartón antes de sacar un número.",
-        "Advertencia",
-        JOptionPane.WARNING_MESSAGE
-    );
-    return;
-}
     int numero = contrlPrin.sacarNumeroAuto();
     if (numero == -1) {
         JOptionPane.showMessageDialog(this, "Ya no hay más números disponibles.");
         return;
     }
+
+    if (numeroActual != -1) {
+        numeroAnterior = numeroActual;
+        frmTablero.marcarNumeroAnterior(numeroActual);
+    }
+
+    numeroActual = numero;
+    frmTablero.marcarNumeroActual(numero);
+
     BtnNumeroCantado.setText(String.valueOf(numero));
     verificarGanadores();
     }//GEN-LAST:event_btnSacarActionPerformed
@@ -707,17 +719,15 @@ public class FrmJuego extends javax.swing.JFrame {
 
     private void btnSacarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarManualActionPerformed
        if (frmCartones.isEmpty()) {
-    JOptionPane.showMessageDialog(this,
-        "Debe agregar al menos un cartón antes de sacar un número.",
-        "Advertencia",
-        JOptionPane.WARNING_MESSAGE
-    );
-    return;
-} 
-       
-       
-        String txt = txtNumeroManual.getText().trim();
+        JOptionPane.showMessageDialog(this,
+            "Debe agregar al menos un cartón antes de sacar un número.",
+            "Advertencia",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
 
+    String txt = txtNumeroManual.getText().trim();
     if (txt.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
@@ -729,16 +739,30 @@ public class FrmJuego extends javax.swing.JFrame {
         boolean ok = contrlPrin.ingresarManual(n);
         if (!ok) {
             JOptionPane.showMessageDialog(this,
-                    "Número inválido, fuera de rango, o ya salió.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                "Número inválido, fuera de rango, o ya salió.",
+                "Error", JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
+
+        // --- ANTERIOR ---
+        if (numeroActual != -1) {
+            numeroAnterior = numeroActual;
+            frmTablero.marcarNumeroAnterior(numeroActual);
+        }
+
+        // --- ACTUAL ---
+        numeroActual = n;
+        frmTablero.marcarNumeroActual(n);
 
         BtnNumeroCantado.setText(String.valueOf(n));
         verificarGanadores();
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Debe escribir un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this,
+            "Debe escribir un número válido.",
+            "Error", JOptionPane.ERROR_MESSAGE
+        );
     }
     }//GEN-LAST:event_btnSacarManualActionPerformed
 
@@ -747,16 +771,17 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroManualActionPerformed
 
     private void btnDesmarcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesmarcarActionPerformed
-       if (!juegoIniciado) {
-    JOptionPane.showMessageDialog(this,
-        "Debe iniciar el juego antes.",
-        "Advertencia",
-        JOptionPane.WARNING_MESSAGE
-    );
-    return;
-}
-        
-        String txt = txtDesmarcar.getText().trim();
+      
+    if (!juegoIniciado) {
+        JOptionPane.showMessageDialog(this,
+            "Debe iniciar el juego antes.",
+            "Advertencia",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    String txt = txtDesmarcar.getText().trim();
 
     if (txt.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese un número.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -766,14 +791,28 @@ public class FrmJuego extends javax.swing.JFrame {
     try {
         int n = Integer.parseInt(txt);
 
-        // 1. Desmarcar en el modelo
+        // 1. Desmarcar en el MODELO y devolverlo a la tombola
         contrlPrin.desmarcarNumero(n);
 
-        // 2. Desmarcar visualmente en todos los FrmCarton
+        // 2. Desmarcar visualmente en TODOS los cartones
         for (FrmCarton frm : frmCartones) {
             frm.DesmarcarCarton(n);
         }
+
+        // 3. Desmarcar en el TABLERO
         frmTablero.desmarcarNumero(n);
+
+        // 4. Limpiar el último número y el anterior si coincide
+        if (numeroActual == n) {
+            numeroActual = -1;
+            BtnNumeroCantado.setText("Último Número:");
+        }
+
+        if (numeroAnterior == n) {
+            numeroAnterior = -1;
+            btnAnteriorNum.setText("");
+        }
+
         JOptionPane.showMessageDialog(this, "Número desmarcado.");
 
     } catch (NumberFormatException e) {
@@ -786,51 +825,50 @@ public class FrmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDesmarcarActionPerformed
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-      if (frmTablero != null) {
-    frmTablero.limpiarTablero();
-}
-        if (!juegoIniciado) {
-    JOptionPane.showMessageDialog(this,
-        "Debe iniciar el juego antes.",
-        "Advertencia",
-        JOptionPane.WARNING_MESSAGE
-    );
-    return;
-}
-        btnSeleccionarModo.setEnabled(false);
-// REINICIAR MODELO
-    contrlPrin.reiniciarJuegoCompleto();
-    
-    // REINICIAR VISTAS DE CARTONES
-    for (FrmCarton frm : frmCartones) {
-        frm.limpiarColores();   // Limpia colores visuales
+      if (!juegoIniciado) {
+        JOptionPane.showMessageDialog(this,
+            "Debe iniciar el juego antes.",
+            "Advertencia",
+            JOptionPane.WARNING_MESSAGE
+        );
+        return;
     }
 
-    // REINICIAR TABLERO
+    btnSeleccionarModo.setEnabled(false);
+
+    // REINICIAR MODELO
+    contrlPrin.reiniciarJuegoCompleto();
+
+    // 🔥 CERRAR Y ELIMINAR TODOS LOS CARTONES 🔥
+    for (FrmCarton frm : frmCartones) {
+        frm.dispose(); // Cierra la ventana del cartón
+    }
+    frmCartones.clear(); // VACÍA LA LISTA
+    // 🔥 SIN ESTO, frmCartones.isEmpty() SIEMPRE DARÁ FALSE 🔥
+
+    // REINICIAR TABLERO VISUAL
     if (frmTablero != null) {
         frmTablero.limpiarTablero();
     }
 
     BtnNumeroCantado.setText("Último Número:");
 
-    // 5. Permitir elegir tipo de juego otra vez
+    // Permitir seleccionar tipo de juego otra vez
     rbtManualJuego.setEnabled(true);
     rbtAutomaticoJuego.setEnabled(true);
 
-    
-
-    // 7. Desactivar todas las funciones hasta iniciar de nuevo
+    // Desactivar botones hasta iniciar de nuevo
     desactivarFuncionesDelJuego();
 
-    // 8. Marcar estado general del juego como NO iniciado
+    // Resetear estado
     juegoIniciado = false;
+    buttonGroup1.clearSelection();
 
     JOptionPane.showMessageDialog(this,
         "Juego reiniciado. Seleccione nuevamente si jugará Manual o Automático.",
         "Reiniciado",
         JOptionPane.INFORMATION_MESSAGE
     );
-    buttonGroup1.clearSelection();
 
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
