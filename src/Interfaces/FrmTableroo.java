@@ -43,7 +43,7 @@ private JLabel buscarLabelPorNumero(int numero) {
             }
         }
     }
-    return null; // si no lo encuentra
+    return null; 
 }
     public void marcarNumero(int n) {
         if (n < 1 || n > 75) return;

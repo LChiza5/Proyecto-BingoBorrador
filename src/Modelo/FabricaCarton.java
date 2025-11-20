@@ -36,7 +36,6 @@ public class FabricaCarton {
 
     public static Carton crear(String tipo) {
 
-        // 👇 AQUI CAMBIAMOS LA GENERACIÓN DEL ID
         String id = generarID();
 
         switch (tipo.toUpperCase()) {

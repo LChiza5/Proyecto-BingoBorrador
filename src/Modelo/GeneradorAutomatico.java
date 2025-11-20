@@ -27,7 +27,6 @@ public class GeneradorAutomatico {
 
             for (int fila = 0; fila < 5; fila++) {
 
-                // Centro libre
                 if (fila == 2 && col == 2) {
                     nums[fila][col] = 0;
                     continue;

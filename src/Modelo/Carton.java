@@ -14,14 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class Carton {
     private String id;
-    private int[][] numeros;      // 5x5
-    private boolean[][] marcados; // 5x5
+    private int[][] numeros;      
+    private boolean[][] marcados; 
 
     public Carton(String id) {
         this.id = id;
         this.numeros = new int[5][5];
         this.marcados = new boolean[5][5];
-        // centro libre
         this.numeros[2][2] = 0;
         this.marcados[2][2] = true;
     }
@@ -38,7 +37,6 @@ public class Carton {
         for (int r=0;r<5;r++) for (int c=0;c<5;c++) {
             if (numeros[r][c] == numero) { marcados[r][c] = true; marcado = true; }
         }
-        // asegurar centro marcado
         marcados[2][2] = true;
         return marcado;
     }
@@ -62,12 +60,7 @@ public class Carton {
         return false;
     }
 
-    /**
-     * Validaciones:
-     * - 24 numeros entre 1..75 (centro libre)
-     * - rango por columna
-     * - no repetidos
-     */
+    
     public boolean validar() {
         Set<Integer> seen = new HashSet<>();
         int count = 0;

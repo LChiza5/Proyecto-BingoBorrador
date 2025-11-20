@@ -123,9 +123,8 @@ public void desmarcarNumero(int n) {
 }
 
 public void reiniciarJuegoCompleto() {
-    juego.iniciarRonda(); // Reinicia tómbola
+    juego.iniciarRonda(); 
 
-    // Limpiar marcados del modelo
     for (Carton c : juego.getCartones()) {
         c.limpiarMarcados();
     }

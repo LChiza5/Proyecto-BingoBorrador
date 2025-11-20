@@ -91,7 +91,7 @@ private final VerificadorGanador verificador = new VerificadorGanador(estrategia
 
     
     public void onGanadores(List<Carton> ganadores) {
-        // para expansión futura
+      
     }
 
     public List<Integer> getNumerosRestantes() {
@@ -110,12 +110,11 @@ public void modoNormal() {
     setEstrategia(new ModoNormal());
 }
 
-// Cambiar a CUATRO ESQUINAS
 public void modoCuatroEsquinas() {
     setEstrategia(new StrategyCuatroEsquinas());
 }
 
-// Cambiar a CARTÓN LLENO
+
 public void modoCartonLleno() {
     setEstrategia(new StrategyCartonLleno());
 }

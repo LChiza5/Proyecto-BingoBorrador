@@ -10,6 +10,9 @@ import Modelo.Carton;
 import Modelo.ModoJuego;
 import java.util.HashSet;
 import java.util.List;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -18,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author Luisk
  */
 public class FrmJuego extends javax.swing.JFrame {
-    private boolean modoAutomatico = false; // false = manual, true = auto
+    private boolean modoAutomatico = false; 
     private boolean juegoIniciado = false;
     private final ControladorJuego contrlPrin = new ControladorJuego();
     private boolean tipoCarton = true; 
@@ -427,100 +430,91 @@ public class FrmJuego extends javax.swing.JFrame {
             frm.pintarCarton(numero);
         }
     }
+    private void reproducirSonido(String ruta) {
+    try {
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(
+            getClass().getResource(ruta)
+        );
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, 
+            "No se pudo reproducir el audio.", 
+            "Error", 
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
     private void configurarModoDeJuego() {
-
-    // Bloquear selección manual/automática del juego
     rbtManualJuego.setEnabled(false);
     rbtAutomaticoJuego.setEnabled(false);
-
-    // Activar funciones generales
     btnAgregarCarton.setEnabled(true);
     btnDesmarcar.setEnabled(true);
     txtDesmarcar.setEnabled(true);
     btnReiniciar.setEnabled(true);
-
-    // SI EL JUEGO ES MANUAL
     if (!modoAutomatico) {
       BtnNumeroCantado.setEnabled(true);
-        // Cartones manuales siempre
         tipoCarton = false;
 
-        // Mostrar que el cartón es manual
-        btnManual.setEnabled(false);      // activo/seleccionado
-        btnAutomatico.setEnabled(true);   // disponible pero no seleccionado
-
-        // Tómbola manual
+        btnManual.setEnabled(false);      
+        btnAutomatico.setEnabled(true);   
         txtNumeroManual.setEnabled(true);
         btnSacarManual.setEnabled(true);
 
-        // Desactivar la tómbola automática
         btnSacar.setEnabled(false);
     }
 
-    // SI EL JUEGO ES AUTOMÁTICO
+   
     else {
       BtnNumeroCantado.setEnabled(true);
-        // Cartones automáticos siempre
+        
         tipoCarton = true;
         txtDesmarcar.setEnabled(true);
         btnDesmarcar.setEnabled(true);
-        // Mostrar que el cartón es automático
-        btnAutomatico.setEnabled(false);  // activo/seleccionado
-        btnManual.setEnabled(true);       // disponible pero no seleccionado
+        btnAutomatico.setEnabled(false);
+        btnManual.setEnabled(true);       
 
-        // Desactivar entrada manual
         txtNumeroManual.setEnabled(false);
         btnSacarManual.setEnabled(false);
 
-        // Activar la tómbola automática
         btnSacar.setEnabled(true);
     }
 }
     private void desactivarFuncionesDelJuego() {
 
-    // Botones relacionados a cartones
     btnAgregarCarton.setEnabled(false);
     btnManual.setEnabled(false);
     btnAutomatico.setEnabled(false);
 
-    // Tombola automática
     btnSacar.setEnabled(false);
 
-    // Tombola manual
     txtNumeroManual.setEnabled(false);
     btnSacarManual.setEnabled(false);
 
-    // Desmarcar
     btnDesmarcar.setEnabled(false);
 
-    // Reiniciar
-    btnReiniciar.setEnabled(true); // este sí queda habilitado
+    btnReiniciar.setEnabled(true); 
     buttonGroup1.clearSelection();
 }
     private void desactivarTodo() {
 
-    // Botones que deben estar apagados desde el inicio
     btnAgregarCarton.setEnabled(false);
     btnDesmarcar.setEnabled(false);
     btnReiniciar.setEnabled(false);
     btnSeleccionarModo.setEnabled(false);
 
-    // Tombola
     btnSacar.setEnabled(false);
     btnSacarManual.setEnabled(false);
     BtnNumeroCantado.setEnabled(false);
 
-    // Texto manual de número
     txtNumeroManual.setEnabled(false);
 
-    // Botones del tipo de cartón
     btnManual.setEnabled(false);
     btnAutomatico.setEnabled(false);
 
-    // Texto de desmarcar
     txtDesmarcar.setEnabled(false);
 
-    // Mostrar texto inicial
     BtnNumeroCantado.setText("Último Número:");
 }
     private void verificarGanadores() {
@@ -532,7 +526,7 @@ public class FrmJuego extends javax.swing.JFrame {
                 ganadores.append("Cartón ID: ").append(c.getId()).append("\n");
             }
         }
-
+        reproducirSonido("/sonidos/a12668a8.wav");
         if (ganadores.length() > 0) {
             JOptionPane.showMessageDialog(
                 this,
@@ -571,27 +565,23 @@ public class FrmJuego extends javax.swing.JFrame {
 
     Carton carton = contrlPrin.buscarCarton(id);
 
-    // Crear la ventana del cartón
     FrmCarton nuevoCarton = new FrmCarton(contrlPrin);
     DesktopJuego.add(nuevoCarton);
 
-    // --- AUTO ---
     if (tipoCarton) {
         nuevoCarton.llenarCarton(carton.getNumeros(), id);
     } 
-    // --- MANUAL ---
     else {
         nuevoCarton.habilitarModoManual();
         nuevoCarton.setId(id); 
     }
 
-    // Mostrarlo
+   
     nuevoCarton.setVisible(true);
 
-    // Registrar observer UNA VEZ
+   
     contrlPrin.registrarObserver(nuevoCarton);
 
-    // Guardarlo
     frmCartones.add(nuevoCarton);
 
     }//GEN-LAST:event_btnAgregarCartonActionPerformed
@@ -676,8 +666,8 @@ if (frmCartones.isEmpty()) {
     }//GEN-LAST:event_btnSacarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
- 
-    // 1. Validar que haya seleccionado Manual o Automático
+      reproducirSonido("/sonidos/7bd17b0b.wav");
+    
     if (!rbtManualJuego.isSelected() && !rbtAutomaticoJuego.isSelected()) {
         JOptionPane.showMessageDialog(this,
             "Debe seleccionar si el juego será Manual o Automático.",
@@ -687,48 +677,41 @@ if (frmCartones.isEmpty()) {
         return;
     }
 
-    // 2. Establecer el modo de juego
+   
     modoAutomatico = rbtAutomaticoJuego.isSelected();
     juegoIniciado = true;
 
-    // 3. Ajustar automáticamente el tipo de cartón según el modo de juego
+    
     if (modoAutomatico) {
-        // Juego AUTOMÁTICO → Cartones automáticos
+
         tipoCarton = true;
 
-        btnAutomatico.setEnabled(false);  // activo
-        btnManual.setEnabled(true);       // disponible pero no activo
+        btnAutomatico.setEnabled(false);  
+        btnManual.setEnabled(true);       
     } else {
-        // Juego MANUAL → Cartones manuales
+        
         tipoCarton = false;
 
-        btnManual.setEnabled(false);      // activo
-        btnAutomatico.setEnabled(true);   // disponible pero no activo
+        btnManual.setEnabled(false);      
+        btnAutomatico.setEnabled(true);   
     }
-
-    // 4. Configurar las opciones del UI según el modo
     configurarModoDeJuego();
-
-    // 5. Activar el panel para seleccionar modo de ganar
     btnSeleccionarModo.setEnabled(true);
 
-    // 6. Mensaje para confirmar
     JOptionPane.showMessageDialog(this,
         "Juego iniciado en modo " + (modoAutomatico ? "Automático" : "Manual") + ".",
         "Listo!",
         JOptionPane.INFORMATION_MESSAGE
     );
 
-    // 7. Inicializar tablero solo la primera vez
     if (frmTablero.getParent() == null) {
         DesktopJuego.add(frmTablero);
         frmTablero.pack();
         frmTablero.setBounds(600, 20, 500, 700);
         frmTablero.setVisible(true);
-        contrlPrin.registrarObserver(frmTablero); // Registrar solo una vez
+        contrlPrin.registrarObserver(frmTablero); 
     }
 
-    // 8. Mostrar texto inicial del número cantado
     BtnNumeroCantado.setText("Último Número:");
     }//GEN-LAST:event_btnIniciarActionPerformed
 
@@ -760,13 +743,11 @@ if (frmCartones.isEmpty()) {
             return;
         }
 
-        // --- ANTERIOR ---
         if (numeroActual != -1) {
             numeroAnterior = numeroActual;
             frmTablero.marcarNumeroAnterior(numeroActual);
         }
 
-        // --- ACTUAL ---
         numeroActual = n;
         frmTablero.marcarNumeroActual(n);
 
@@ -806,18 +787,15 @@ if (frmCartones.isEmpty()) {
     try {
         int n = Integer.parseInt(txt);
 
-        // 1. Desmarcar en el MODELO y devolverlo a la tombola
         contrlPrin.desmarcarNumero(n);
 
-        // 2. Desmarcar visualmente en TODOS los cartones
+   
         for (FrmCarton frm : frmCartones) {
             frm.DesmarcarCarton(n);
         }
 
-        // 3. Desmarcar en el TABLERO
         frmTablero.desmarcarNumero(n);
 
-        // 4. Limpiar el último número y el anterior si coincide
         if (numeroActual == n) {
             numeroActual = -1;
             BtnNumeroCantado.setText("Último Número:");
@@ -850,31 +828,24 @@ if (frmCartones.isEmpty()) {
 
     btnSeleccionarModo.setEnabled(false);
 
-    // REINICIAR MODELO
     contrlPrin.reiniciarJuegoCompleto();
 
-    // 🔥 CERRAR Y ELIMINAR TODOS LOS CARTONES 🔥
     for (FrmCarton frm : frmCartones) {
-        frm.dispose(); // Cierra la ventana del cartón
+        frm.dispose(); 
     }
-    frmCartones.clear(); // VACÍA LA LISTA
-    // 🔥 SIN ESTO, frmCartones.isEmpty() SIEMPRE DARÁ FALSE 🔥
-
-    // REINICIAR TABLERO VISUAL
+    frmCartones.clear(); 
+   
     if (frmTablero != null) {
         frmTablero.limpiarTablero();
     }
 
     BtnNumeroCantado.setText("Último Número:");
 
-    // Permitir seleccionar tipo de juego otra vez
     rbtManualJuego.setEnabled(true);
     rbtAutomaticoJuego.setEnabled(true);
 
-    // Desactivar botones hasta iniciar de nuevo
     desactivarFuncionesDelJuego();
 
-    // Resetear estado
     juegoIniciado = false;
     buttonGroup1.clearSelection();
 
