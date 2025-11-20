@@ -32,8 +32,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         BtnJugar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        MenuReglas = new javax.swing.JMenuBar();
         mnReglas = new javax.swing.JMenu();
+        MenuItemVerReglas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,15 +66,36 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(BtnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 760, 140, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bingo-banner-floating-3d-lotto-game-balls-lotteries-gaming-event-promotion-with-golden-coins-and-falling-confetti-illustration-vector.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 0, 1920, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, -10, 1920, 970));
 
-        mnReglas.setBackground(new java.awt.Color(153, 153, 153));
-        mnReglas.setForeground(new java.awt.Color(0, 0, 0));
+        MenuReglas.setBackground(new java.awt.Color(0, 0, 51));
+        MenuReglas.setForeground(new java.awt.Color(255, 255, 255));
+        MenuReglas.setEnabled(false);
+        MenuReglas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        MenuReglas.setOpaque(true);
+
+        mnReglas.setBackground(new java.awt.Color(255, 255, 255));
+        mnReglas.setForeground(new java.awt.Color(255, 255, 255));
         mnReglas.setText("Reglas");
-        mnReglas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenuBar1.add(mnReglas);
+        mnReglas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        mnReglas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReglasActionPerformed(evt);
+            }
+        });
 
-        setJMenuBar(jMenuBar1);
+        MenuItemVerReglas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MenuItemVerReglas.setText("Ver Reglas");
+        MenuItemVerReglas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemVerReglasActionPerformed(evt);
+            }
+        });
+        mnReglas.add(MenuItemVerReglas);
+
+        MenuReglas.add(mnReglas);
+
+        setJMenuBar(MenuReglas);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -82,6 +104,16 @@ public class Principal extends javax.swing.JFrame {
         FrmJuego frmJuego = new FrmJuego();
         frmJuego.setVisible(true);
     }//GEN-LAST:event_BtnJugarActionPerformed
+
+    private void mnReglasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReglasActionPerformed
+        
+    }//GEN-LAST:event_mnReglasActionPerformed
+
+    private void MenuItemVerReglasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVerReglasActionPerformed
+        DlgReglas reglas = new DlgReglas(this, true);
+        reglas.setLocationRelativeTo(this); // Para centrarlo
+        reglas.setVisible(true);
+    }//GEN-LAST:event_MenuItemVerReglasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,8 +152,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnJugar;
+    private javax.swing.JMenuItem MenuItemVerReglas;
+    private javax.swing.JMenuBar MenuReglas;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu mnReglas;
     // End of variables declaration//GEN-END:variables
