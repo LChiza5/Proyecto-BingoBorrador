@@ -50,8 +50,19 @@ private JLabel buscarLabelPorNumero(int numero) {
         JLabel lbl = tablero[n - 1];
         lbl.setBackground(Color.YELLOW);
     }
+    public void limpiarTablero() {
+    for (JLabel lbl : tablero) {
+        if (lbl != null) lbl.setBackground(Color.WHITE);
+    }
+}
+public void desmarcarNumero(int numero) {
+    if (numero < 1 || numero > 75) return;
 
-
+    JLabel lbl = tablero[numero - 1];
+    if (lbl != null) {
+        lbl.setBackground(Color.WHITE);
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -723,7 +734,7 @@ private JLabel buscarLabelPorNumero(int numero) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

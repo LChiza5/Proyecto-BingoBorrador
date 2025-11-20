@@ -114,5 +114,17 @@ public void registrarObserver(Observer o) {
 public void eliminarObserver(Observer o) {
     juego.getTombola().removeObserver(o);
 }
+public void desmarcarNumero(int n) {
+    for (Carton c : juego.getCartones()) {
+        c.desmarcar(n);
+    }
+}
+public void reiniciarJuegoCompleto() {
+    juego.iniciarRonda(); // Reinicia tómbola
 
+    // Limpiar marcados del modelo
+    for (Carton c : juego.getCartones()) {
+        c.limpiarMarcados();
+    }
+}
 }
