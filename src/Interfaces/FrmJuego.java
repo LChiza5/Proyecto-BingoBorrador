@@ -526,8 +526,9 @@ public class FrmJuego extends javax.swing.JFrame {
                 ganadores.append("Cartón ID: ").append(c.getId()).append("\n");
             }
         }
-        reproducirSonido("/sonidos/a12668a8.wav");
+       
         if (ganadores.length() > 0) {
+            reproducirSonido("/sonidos/a12668a8.wav");
             JOptionPane.showMessageDialog(
                 this,
                 "¡TENEMOS GANADOR(ES)!\n\n" + ganadores,
