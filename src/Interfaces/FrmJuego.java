@@ -47,30 +47,29 @@ public class FrmJuego extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         DesktopJuego = new javax.swing.JDesktopPane();
-        imgCarton = new javax.swing.JLabel();
-        imgBolas = new javax.swing.JLabel();
         imgFicha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
-        btnTxtAnteriorNumero = new javax.swing.JButton();
-        btnAnteriorNum = new javax.swing.JButton();
-        btnDesmarcar = new javax.swing.JButton();
-        txtDesmarcar = new javax.swing.JTextField();
-        btnReiniciar = new javax.swing.JButton();
         rbtManualJuego = new javax.swing.JRadioButton();
         rbtAutomaticoJuego = new javax.swing.JRadioButton();
+        btnSeleccionarModo = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnAutomatico = new javax.swing.JButton();
         btnManual = new javax.swing.JButton();
         btnAgregarCarton = new javax.swing.JButton();
-        btnTxtCartones = new javax.swing.JButton();
-        btnSeleccionarModo = new javax.swing.JButton();
+        lblCartones = new javax.swing.JLabel();
         panelTombola = new javax.swing.JPanel();
-        lblTombola = new javax.swing.JLabel();
         btnSacar = new javax.swing.JButton();
         BtnNumeroCantado = new javax.swing.JButton();
         btnSacarManual = new javax.swing.JButton();
         txtNumeroManual = new javax.swing.JTextField();
+        lblTombola = new javax.swing.JLabel();
+        btnDesmarcar = new javax.swing.JButton();
+        txtDesmarcar = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnReiniciar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,54 +78,26 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
-        DesktopJuego.setBackground(new java.awt.Color(153, 153, 153));
-
-        imgCarton.setBackground(new java.awt.Color(153, 153, 153));
-        imgCarton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/bingo.png"))); // NOI18N
-        imgCarton.setOpaque(true);
-
-        imgBolas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/videobingo-slots-header.png"))); // NOI18N
+        DesktopJuego.setBackground(new java.awt.Color(51, 0, 0));
 
         imgFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ficha-de-casino.png"))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55)));
+
         btnIniciar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnIniciar.setText("Iniciar Juego");
+        btnIniciar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
             }
         });
 
-        btnTxtAnteriorNumero.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnTxtAnteriorNumero.setText("Último Número:");
-        btnTxtAnteriorNumero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTxtAnteriorNumeroActionPerformed(evt);
-            }
-        });
-
-        btnDesmarcar.setText("Desmarcar numero");
-        btnDesmarcar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDesmarcarActionPerformed(evt);
-            }
-        });
-
-        txtDesmarcar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDesmarcarActionPerformed(evt);
-            }
-        });
-
-        btnReiniciar.setText("Reiniciar juego");
-        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReiniciarActionPerformed(evt);
-            }
-        });
-
         buttonGroup1.add(rbtManualJuego);
+        rbtManualJuego.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rbtManualJuego.setText("Manual");
+        rbtManualJuego.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         rbtManualJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtManualJuegoActionPerformed(evt);
@@ -134,55 +105,63 @@ public class FrmJuego extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rbtAutomaticoJuego);
+        rbtAutomaticoJuego.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rbtAutomaticoJuego.setText("Automatico");
+        rbtAutomaticoJuego.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnSeleccionarModo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSeleccionarModo.setText("Modo de juego");
+        btnSeleccionarModo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55)));
+        btnSeleccionarModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarModoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel2.setText("       Configurar Juego");
+        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAnteriorNum, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnReiniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDesmarcar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDesmarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbtManualJuego)
-                            .addComponent(rbtAutomaticoJuego))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rbtAutomaticoJuego)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(rbtManualJuego)
-                        .addGap(10, 10, 10)
-                        .addComponent(rbtAutomaticoJuego))
-                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTxtAnteriorNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(btnAnteriorNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDesmarcar, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(txtDesmarcar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbtManualJuego)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rbtAutomaticoJuego))
+                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55)));
 
         btnAutomatico.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnAutomatico.setText("Automatico");
@@ -208,40 +187,38 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
-        btnTxtCartones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnTxtCartones.setText("Anterior Número:");
-        btnTxtCartones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTxtCartonesActionPerformed(evt);
-            }
-        });
+        lblCartones.setBackground(new java.awt.Color(51, 51, 51));
+        lblCartones.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        lblCartones.setForeground(new java.awt.Color(255, 255, 255));
+        lblCartones.setText("         Cartones");
+        lblCartones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblCartones.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnManual)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnAutomatico)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAgregarCarton)
-                        .addGap(83, 83, 83))))
+                .addGap(21, 21, 21)
+                .addComponent(btnManual)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAutomatico)
+                .addGap(16, 16, 16))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(btnTxtCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(btnAgregarCarton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(btnTxtCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(lblCartones, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManual, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,20 +227,7 @@ public class FrmJuego extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        btnSeleccionarModo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnSeleccionarModo.setText("Modo de juego");
-        btnSeleccionarModo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeleccionarModoActionPerformed(evt);
-            }
-        });
-
-        panelTombola.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(211, 185, 6), 2));
-
-        lblTombola.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTombola.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tombola.jpg"))); // NOI18N
-        lblTombola.setText("jLabel1");
-        lblTombola.setOpaque(true);
+        panelTombola.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55), 2));
 
         btnSacar.setBackground(new java.awt.Color(212, 175, 55));
         btnSacar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -294,9 +258,36 @@ public class FrmJuego extends javax.swing.JFrame {
             }
         });
 
+        txtNumeroManual.setBackground(new java.awt.Color(51, 0, 0));
+        txtNumeroManual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNumeroManual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNumeroManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumeroManualActionPerformed(evt);
+            }
+        });
+
+        lblTombola.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTombola.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rueda.png"))); // NOI18N
+        lblTombola.setOpaque(true);
+
+        btnDesmarcar.setBackground(new java.awt.Color(212, 175, 55));
+        btnDesmarcar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDesmarcar.setForeground(new java.awt.Color(0, 0, 0));
+        btnDesmarcar.setText("Desmarcar numero");
+        btnDesmarcar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDesmarcar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesmarcarActionPerformed(evt);
+            }
+        });
+
+        txtDesmarcar.setBackground(new java.awt.Color(51, 0, 0));
+        txtDesmarcar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtDesmarcar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDesmarcar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDesmarcarActionPerformed(evt);
             }
         });
 
@@ -304,96 +295,128 @@ public class FrmJuego extends javax.swing.JFrame {
         panelTombola.setLayout(panelTombolaLayout);
         panelTombolaLayout.setHorizontalGroup(
             panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTombola, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblTombola, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelTombolaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnSacar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSacarManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDesmarcar, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(txtNumeroManual)
-                    .addComponent(btnSacarManual, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(txtDesmarcar))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelTombolaLayout.setVerticalGroup(
             panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTombolaLayout.createSequentialGroup()
-                .addComponent(lblTombola, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSacar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                    .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSacarManual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblTombola, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSacar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnNumeroCantado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSacarManual, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumeroManual, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTombolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDesmarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDesmarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        DesktopJuego.setLayer(imgCarton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(imgBolas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/BingoBanner.png"))); // NOI18N
+
+        btnReiniciar.setBackground(new java.awt.Color(51, 51, 51));
+        btnReiniciar.setFont(new java.awt.Font("Serif", 0, 18)); // NOI18N
+        btnReiniciar.setText("Reiniciar juego");
+        btnReiniciar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55)));
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ficha-de-casino.png"))); // NOI18N
+
         DesktopJuego.setLayer(imgFicha, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        DesktopJuego.setLayer(btnSeleccionarModo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopJuego.setLayer(panelTombola, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(btnReiniciar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopJuego.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DesktopJuegoLayout = new javax.swing.GroupLayout(DesktopJuego);
         DesktopJuego.setLayout(DesktopJuegoLayout);
         DesktopJuegoLayout.setHorizontalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(105, 105, 105)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(panelTombola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(84, 84, 84)
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addComponent(imgBolas)
-                        .addGap(296, 296, 296)
-                        .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
-                        .addComponent(panelTombola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(880, 880, 880))))
+                    .addComponent(jLabel1)
+                    .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopJuegoLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopJuegoLayout.createSequentialGroup()
+                        .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
         );
         DesktopJuegoLayout.setVerticalGroup(
             DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopJuegoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSeleccionarModo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgCarton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(465, 465, 465))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DesktopJuegoLayout.createSequentialGroup()
+            .addGroup(DesktopJuegoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgBolas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
-                .addComponent(panelTombola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(369, 369, 369))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelTombola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63))
+                            .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 191, Short.MAX_VALUE))
+                    .addGroup(DesktopJuegoLayout.createSequentialGroup()
+                        .addGroup(DesktopJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopJuego, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(DesktopJuego)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopJuego)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(DesktopJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -709,14 +732,6 @@ if (frmCartones.isEmpty()) {
     BtnNumeroCantado.setText("Último Número:");
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void btnTxtAnteriorNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTxtAnteriorNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTxtAnteriorNumeroActionPerformed
-
-    private void btnTxtCartonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTxtCartonesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTxtCartonesActionPerformed
-
     private void btnSacarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarManualActionPerformed
        if (frmCartones.isEmpty()) {
         JOptionPane.showMessageDialog(this,
@@ -810,7 +825,6 @@ if (frmCartones.isEmpty()) {
 
         if (numeroAnterior == n) {
             numeroAnterior = -1;
-            btnAnteriorNum.setText("");
         }
 
         JOptionPane.showMessageDialog(this, "Número desmarcado.");
@@ -885,7 +899,6 @@ if (frmCartones.isEmpty()) {
     private javax.swing.JButton BtnNumeroCantado;
     private javax.swing.JDesktopPane DesktopJuego;
     private javax.swing.JButton btnAgregarCarton;
-    private javax.swing.JButton btnAnteriorNum;
     private javax.swing.JButton btnAutomatico;
     private javax.swing.JButton btnDesmarcar;
     private javax.swing.JButton btnIniciar;
@@ -894,14 +907,14 @@ if (frmCartones.isEmpty()) {
     private javax.swing.JButton btnSacar;
     private javax.swing.JButton btnSacarManual;
     private javax.swing.JButton btnSeleccionarModo;
-    private javax.swing.JButton btnTxtAnteriorNumero;
-    private javax.swing.JButton btnTxtCartones;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel imgBolas;
-    private javax.swing.JLabel imgCarton;
     private javax.swing.JLabel imgFicha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCartones;
     private javax.swing.JLabel lblTombola;
     private javax.swing.JPanel panelTombola;
     private javax.swing.JRadioButton rbtAutomaticoJuego;
