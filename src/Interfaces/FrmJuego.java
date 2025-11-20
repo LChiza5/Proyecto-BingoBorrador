@@ -82,6 +82,7 @@ public class FrmJuego extends javax.swing.JFrame {
         });
 
         DesktopJuego.setBackground(new java.awt.Color(51, 0, 0));
+        DesktopJuego.setEnabled(false);
 
         imgFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ficha-de-casino.png"))); // NOI18N
 
@@ -122,6 +123,7 @@ public class FrmJuego extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("       Configurar Juego");
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -230,6 +232,7 @@ public class FrmJuego extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        panelTombola.setBackground(new java.awt.Color(51, 51, 51));
         panelTombola.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(212, 175, 55), 2));
 
         btnSacar.setBackground(new java.awt.Color(212, 175, 55));
@@ -264,12 +267,14 @@ public class FrmJuego extends javax.swing.JFrame {
         txtNumeroManual.setBackground(new java.awt.Color(51, 0, 0));
         txtNumeroManual.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumeroManual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNumeroManual.setOpaque(true);
         txtNumeroManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumeroManualActionPerformed(evt);
             }
         });
 
+        lblTombola.setBackground(new java.awt.Color(51, 51, 51));
         lblTombola.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTombola.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rueda.png"))); // NOI18N
         lblTombola.setOpaque(true);
