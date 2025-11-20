@@ -155,9 +155,6 @@ public void desmarcarNumero(int numero) {
         jLabel79 = new javax.swing.JLabel();
         jLabel80 = new javax.swing.JLabel();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
 
         panelTablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
